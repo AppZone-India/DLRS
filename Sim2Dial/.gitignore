@@ -15,7 +15,6 @@ bc-android.keystore
 /jni
 /libs
 /obj
-/submodules
 /tests
 /ant.properties
 /build.xml
