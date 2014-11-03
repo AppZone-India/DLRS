@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Selector Colors !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <!-- prefix= s -->
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Login Screen @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Login, DialPad/CallLog/FevCall/Contact Call  Button State  Normal~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <array name="s0_login">
+        <item format="color">#A91D1D</item>
+        <item format="color">#9f0404</item>
+        <item format="color">#8F0404</item>
+    </array>
+
+    <color name="stc0_login">#9f0404</color>
+    
+   
+
+    <item name="stw0_login" format="integer" type="integer">1</item>
+
+    <integer-array name="rd0_login">
+        <item>0</item>
+    </integer-array>
+    
+ 	<array name="s1_login">
+        <item format="color">#A91D1D</item>
+        <item format="color">#9f0404</item>
+        <item format="color">#8F0404</item>
+    </array>
+
+    <color name="stc1_login">#9f0404</color>
+    
+   
+
+    <item name="stw1_login" format="integer" type="integer">1</item>
+
+    <integer-array name="rd1_login">
+        <item>0</item>
+    </integer-array>
+    
+     <array name="s2_login">
+        <item format="color">#A91D1D</item>
+        <item format="color">#9f0404</item>
+        <item format="color">#8F0404</item>
+    </array>
+
+    <color name="stc2_login">#9f0404</color>
+    
+   
+
+    <item name="stw2_login" format="integer" type="integer">1</item>
+
+    <integer-array name="rd2_login">
+        <item>0</item>
+    </integer-array>
+    
+    
+</resources>

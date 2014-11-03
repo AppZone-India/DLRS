@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Foreground Colors !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <!-- prefix-=f -->
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@common Screen@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+    <color name="f_com_lbl">#ffffffff</color> <!-- welcome uri lbl, -->
+    <color name="f_com_txt">#ffffffff</color> <!-- welcome txt, -->
+    <color name="f_com_hint">#ffffffff</color> <!-- welcome hint, -->
+    <color name="f_com_button">#ffffffff</color> <!-- welcome next btn, -->
+    <color name="f_com_powered">#ffffffff</color> <!-- welcome, -->
+    <color name="f_com_link">#ffffffff</color>
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Welcome Screen@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+    <color name="f_wel_eg">#ffffffff</color> <!--  -->
+    <color name="f_wel_ins_head">#ffffffff</color>
+    <color name="f_wel_ins">#ffffffff</color>
+    <color name="f_wel_wn_head">#ffffffff</color>
+    <color name="f_wel_wn">#ffffffff</color>
+
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Login Screen@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+    <!-- Enabled & Normal -->
+
+    <color name="f_login_pan_text">#000000</color> <!-- Login,Contact Search,Fev Search EditText -->
+
+    <color name="f_login_url">#ffff</color>
+    <color name="f_login_edit_txt">#000000</color>
+    <!-- Disabled -->
+    <!-- Validation -->
+    <color name="fv_login">#ff0000</color>
+    <!-- Hints -->
+    <color name="fh_login_edit_txt">#fccc</color>
+    <!-- Edittext background -->
+
+   <!--  <color name="ed_strk_blue5DBDE7">#555DBDE7</color>
+    <color name="grayA9A9A9">#f000</color> -->
+
+    <!-- ########################################Dialpad ##################################################### -->
+    <color name="fdialpad_edittext">#f000</color>
+    <color name="fdialpad_balence_pan">#ffff</color>
+    <color name="fdialpad_call_button">#ffff</color>
+    <color name="fdialpad_callback_button">#ffff</color>
+    <!-- ########################################Call Log Screen ##################################################### -->
+    <!-- ########################################Call Details Screen ##################################################### -->
+    <!-- ########################################Phonebook Screen##################################################### -->
+    <!-- ########################################Fev Screen ##################################################### -->
+    <!-- ########################################Menue Screen##################################################### -->
+    <!-- ########################################Dialog Type one ##################################################### -->
+    <!-- ########################################Dialog Type two##################################################### -->
+    <!-- ########################################Misc Screen ##################################################### -->
+    <!-- ########################################IN Call Screen ##################################################### -->
+    <!-- ########################################Out Call Screen ##################################################### -->
+
+</resources>

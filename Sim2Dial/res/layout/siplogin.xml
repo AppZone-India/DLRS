@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_in_call_gradient_connected" >
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+         android:layout_above="@+id/pan"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_launcher" />
+
+    <RelativeLayout
+        android:id="@+id/pan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/poweredby"
+       
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center" >
+
+        <include layout="@layout/loginpan" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/poweredby"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:text="@string/poweredby"
+        android:textColor="@color/f_com_powered"
+        android:textColorLink="@color/f_com_link"
+        android:textSize="14sp" />
+
+</RelativeLayout>

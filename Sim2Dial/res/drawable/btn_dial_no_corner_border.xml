@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- Disabled views -->
+    <item android:drawable="@drawable/btn_dial_selected_no_corner_border" android:state_enabled="false" android:state_focused="true" />
+    <item android:drawable="@drawable/btn_dial_selected_no_corner_border" android:state_enabled="false"/>
+    
+    <!-- Enabled views -->
+    <item android:drawable="@drawable/shp_orange_enabled" android:state_pressed="true" android:state_enabled="true"/>
+    <item android:drawable="@drawable/btn_dial_selected_no_corner_border" android:state_focused="true" android:state_enabled="true"/>
+    <item android:drawable="@drawable/btn_dial_normal_no_corner_border" android:state_enabled="true"/>
+
+</selector>

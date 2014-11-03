@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="@dimen/layout_padding"
+    android:background="@color/white"
+    android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/ammount"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/black"
+        android:layout_toLeftOf="@+id/date"
+        android:text="Ammount" />
+
+    <TextView
+        android:id="@+id/method"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/ammount"
+        android:textColor="@color/co_callback_nor"
+        android:layout_below="@+id/ammount"
+        android:layout_marginTop="4dp"
+        android:text="Method" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignBottom="@+id/method" android:textColor="@color/co_callback_nor"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:text="Date" />
+
+</RelativeLayout>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Khalid -->
+
+    <color name="co_rate_txt">#EDAE44</color>
+    <color name="co_list_divider">#D6D2C9</color>
+    <color name="co_call_nor">#FFB402</color>
+    <color name="co_callback_nor">#929292</color>
+    <color name="co_call_pressed">#EFA400</color>
+    <color name="co_callback_pressed">#828282</color>
+    <color name="co_policy">#BF8300</color>
+    <color name="co_login_btn">#FFFF</color>
+    <color name="co_login_pressed">#FFCCCCCC</color>
+    <color name="co_login_nor">#FF000000</color>
+    <color name="co_header_bg">#FFFF9955</color>
+    <!--  -->
+    <color name="account_inactive">#FF646464</color>
+    <color name="account_unregistered">#FFFFC200</color>
+    <color name="account_valid">#FF84E300</color>
+    <color name="account_error">#FFFF0F00</color>
+    <color name="gray_4C4C4C">#FF4C4C4C</color>
+    <color name="gray_333333">#FF333333</color>
+    <color name="gray_DDD">#DDD</color>
+
+    <!-- Incall (extensible_card) background color -->
+    <color name="gray_E5E5E5">#E5E5E5</color>
+    <color name="gray_DFDCDE">#DFDCDE</color>
+    <color name="gray_D6D4D5">#D6D4D5</color>
+
+    <!-- the background color used for unread conversation -->
+    <color name="unread_bgcolor">#ffffffff</color>
+    <color name="read_bgcolor">#ffeeeeee</color>
+
+    <drawable name="light_blue_background">#ffecfbff</drawable>
+
+    <!-- toggle buttons -->
+    <color name="tg_top_normal">#c9cccf</color>
+    <color name="tg_bottom_normal">#a9adb4</color>
+    <color name="tg_top_on">#4f8df1</color>
+    <color name="tg_bottom_on">#175cce</color>
+
+    <!-- Color of image view placeholder. -->
+    <color name="image_placeholder">#DDDDDD</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Dialpad Digit enabled button color -->
+    <color name="btn_color_en_start">#ffffff</color>
+    <color name="btn_color_en_mid">#ffE9E6E8</color>
+    <color name="btn_color_en_end">#ffDAD8D9</color>
+    <color name="btn_color_en_stroke">#ff999999</color>
+
+    <!-- Dialpad Digit normal button color -->
+    <color name="btn_color_norm_start">#EBEBED</color>
+    <color name="btn_color_norm_end">#ffDAD8D9</color>
+
+    <!-- Dialpad VOIPCall blue enable button color -->
+    <color name="btn_color_blue_en_start">#1175CF</color>
+    <color name="btn_color_blue_en_mid">#0D6AC0</color>
+    <color name="btn_color_blue_en_end">#0D459F</color>
+
+    <!-- Dialpad VOIPCall blue disabled button color -->
+    <color name="btn_color_blue_dis_start">#AA1175CF</color>
+    <color name="btn_color_blue_dis_mid">#AA0D6AC0</color>
+    <color name="btn_color_blue_dis_end">#AA0D459F</color>
+
+    <!-- Dialpad VOIPCall blue pressed button color -->
+    <color name="btn_color_blue_press_start">#0C7FD0</color>
+    <color name="btn_color_blue_press_end">#05325B</color>
+
+    <!-- Dialpad VOIPCall orange enable button color -->
+    <color name="btn_color_orng_en_start">#FFA618</color>
+    <color name="btn_color_orng_en_mid">#FB6602</color>
+    <color name="btn_color_orng_en_end">#D64D17</color>
+
+    <!-- Dialpad VOIPCall orange disabled button color -->
+    <color name="btn_color_orng_dis_start">#AAFFA618</color>
+    <color name="btn_color_orng_dis_mid">#AAFB6602</color>
+    <color name="btn_color_orng_dis_end">#AAD64D17</color>
+
+    <!-- Dialpad VOIPCall oreange pressed button color -->
+    <color name="btn_color_orng_press_start">#FFA618</color>
+    <color name="btn_color_orng_press_end">#B0300D</color>
+
+    <!-- Login background -->
+    <color name="bg_color_login_start">#E8E8E8</color>
+    <color name="bg_color_login_mid">#E1E2E1</color>
+    <color name="bg_color_login_end">#D2CFD0</color>
+
+    <!-- Edittext background -->
+    <color name="ed_mid_grayE0DEDF">#E0DEDF</color>
+    <color name="ed_end_grayE9">#E9E9E9</color>
+    <color name="ed_strt_graD6D2D1">#D6D2D1</color>
+    <color name="ed_strk_grayABA8A7">#ABA8A7</color>
+    <color name="ed_strk_blue5DBDE7">#5DBDE7</color>
+    <color name="grayA9A9A9">#777777</color>
+    <color name="black">#000000</color>
+
+</resources>

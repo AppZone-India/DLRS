@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/login_btn_height"
+        android:background="@color/co_header_bg" >
+
+        <LinearLayout
+            android:id="@+id/center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/shp_login_edt"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/allContacts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/sltr_contacts_left"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/button_all_contacts"
+                android:textColor="@drawable/text_switch_button_color"
+                android:textSize="@dimen/normal_text" />
+
+            <TextView
+                android:id="@+id/linphoneContacts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/sltr_contacts_right"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/button_sip_contacts"
+                android:textColor="@drawable/text_switch_button_color"
+                android:textSize="@dimen/normal_text" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/newContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/center"
+            android:gravity="center"
+            android:text="+"
+            android:textColor="@drawable/text_switch_button_color"
+            android:textSize="35sp" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/searchbox"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/sltr_search"
+        android:gravity="center"
+        android:hint="Search"
+        android:textColor="@drawable/text_button"
+        android:textSize="@dimen/normal_text" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ListView
+            android:id="@+id/contactsList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/searchbox"
+            android:layout_marginRight="18dp"
+            android:cacheColorHint="@color/transparent"
+            android:divider="@color/transparent"
+            android:dividerHeight="1px"
+
+            android:fastScrollEnabled="true" />
+
+        <com.sim2dial.dialer.util.SideBar
+            android:id="@+id/sideBar"
+            android:layout_width="20dp"
+            android:layout_alignParentRight="true"
+     
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/noSipContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/no_sip_contact"
+            android:textAppearance="@android:style/TextAppearance.Large"
+            android:textColor="@drawable/text_color"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/noContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/no_contact"
+            android:textAppearance="@android:style/TextAppearance.Large"
+            android:textColor="@drawable/text_color"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</LinearLayout>

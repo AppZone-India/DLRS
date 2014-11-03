@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+     >
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/passet"
+         />
+
+    <EditText
+        android:id="@+id/vcode"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        
+        android:ems="10"
+        android:inputType="number"
+        android:singleLine="false"
+        
+        android:text=""
+        android:hint=""
+         >
+
+        <requestFocus />
+    </EditText>
+
+</LinearLayout>
