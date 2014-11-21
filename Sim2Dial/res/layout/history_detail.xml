@@ -3,168 +3,142 @@
     xmlns:linphone="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-  	android:background="@drawable/background"
+    android:background="#ffff"
     android:orientation="vertical" >
-    
-    <LinearLayout 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:paddingTop="20dp"
-        android:paddingLeft="10dp"
+
+    <TextView
+        android:id="@+id/header"
+        style="@style/Header"
+        android:text="@string/button_all_call" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:paddingLeft="25dp"
         android:paddingRight="10dp"
-	    android:gravity="center"
-	    android:orientation="horizontal">
-        
-        <com.sim2dial.dialer.ui.AvatarWithShadow
-		    android:id="@+id/contactPicture"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    linphone:picture="@drawable/unknown_small" />
-	        
-        <LinearLayout
+        android:paddingTop="20dp" >
+
+        <!--
+             <com.sim2dial.dialer.ui.AvatarWithShadow
+            android:id="@+id/contactPicture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            linphone:picture="@drawable/unknown_small" />
+        -->
+
+        <com.sim2dial.dialer.util.ImageViewRounded
+            android:id="@+id/contactPicture"
+            android:layout_width="80dip"
+            android:layout_height="80dip"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
+            android:background="#e7e7e7"
+            android:src="@drawable/ic_contact" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
             android:orientation="vertical"
-            android:paddingLeft="10dp">
-            
-	        <TextView
-	            android:id="@+id/contactName"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:textAppearance="?android:attr/textAppearanceLarge"
-		    	android:textColor="@android:color/black" />
-	        
-	        <TextView
-	            android:id="@+id/contactAddress"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:textAppearance="?android:attr/textAppearanceSmall"
-		    	android:textColor="@android:color/black" />
-        
+            android:paddingLeft="25dp" >
+
+            <TextView
+                android:id="@+id/contactName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/contactAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@android:color/black" />
         </LinearLayout>
-        
     </LinearLayout>
-    
-    <RelativeLayout 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:id="@+id/logRow"
-	    android:paddingTop="20dp">
-        
+
+    <RelativeLayout
+        android:id="@+id/logRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp" >
+
         <TextView
             android:id="@+id/callDirection"
-            android:paddingLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-	    	android:textColor="@android:color/black" />
-        
+            android:paddingLeft="10dp"
+            android:textColor="@android:color/black" />
+
         <TextView
             android:id="@+id/date"
-            android:paddingRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-	    	android:textColor="@android:color/black" />
-        
+            android:paddingRight="10dp"
+            android:textColor="@android:color/black" />
+
         <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_toLeftOf="@id/date"
             android:layout_toRightOf="@id/callDirection"
+            android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textColor="@android:color/black" />
-        
     </RelativeLayout>
-    
-    <RelativeLayout 
-	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"
-	    android:paddingTop="20dp">
-        
-        <RelativeLayout
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:id="@+id/callBackRow"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
-            
-	        <ImageView
-	            android:contentDescription="@string/content_description_dial_back"
-	            android:id="@+id/dialBack"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:adjustViewBounds="true"
-	            android:src="@drawable/button"
-		    	android:layout_centerInParent="true" />
-	        
-	        <TextView 
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:text="@string/call"
-		    	android:textColor="@android:color/black"
-		    	android:layout_centerInParent="true" />
-        
-        </RelativeLayout>
-        
-        <RelativeLayout
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:id="@+id/chatRow"
-		    android:layout_below="@id/callBackRow"
-	    	android:layout_marginTop="20dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
-            
-	        <ImageView
-	            android:contentDescription="@string/content_description_chat"
-	            android:id="@+id/chat"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:adjustViewBounds="true"
-	            android:src="@drawable/button"
-		    	android:layout_centerInParent="true" />
-	        
-	        <TextView 
-	            android:id="@+id/chattv"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:text="@string/chat"
-		    	android:textColor="@android:color/black"
-		    	android:layout_centerInParent="true" />
-        
-        </RelativeLayout>
-        
-        <RelativeLayout
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:id="@+id/addContactRow"
-		    android:layout_below="@id/chatRow"
-	    	android:layout_marginTop="10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
-            
-	        <ImageView
-	            android:contentDescription="@string/content_description_add_contact"
-	            android:id="@+id/addToContacts"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:adjustViewBounds="true"
-	            android:src="@drawable/button"
-		    	android:layout_centerInParent="true" />
-	        
-	        <TextView 
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:text="@string/add_to_contacts"
-		    	android:textColor="@android:color/black"
-		    	android:layout_centerInParent="true" />
-        
-        </RelativeLayout>
-        
-    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingTop="50dp" >
+
+        <TextView
+            android:id="@+id/dialBack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/sltr_login"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="@string/call"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/chat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/sltr_login"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="@string/chat"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/addToContacts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/sltr_login"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="@string/add_to_contacts"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 
 </LinearLayout>

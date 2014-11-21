@@ -31,7 +31,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:background="@drawable/history_all"
+          
             android:contentDescription="@string/content_description_all_calls"
             android:gravity="center"
             android:paddingTop="15dp"
@@ -45,7 +45,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:background="@drawable/history_missed"
+            
             android:contentDescription="@string/content_description_missed_calls"
             android:gravity="center"
             android:paddingTop="15dp"
@@ -59,7 +59,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:background="@drawable/history_edit"
+        
             android:contentDescription="@string/content_description_edit"
             android:gravity="center"
             android:paddingTop="20dp"
@@ -73,7 +73,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:background="@drawable/history_ok"
+            
             android:contentDescription="@string/content_description_validate"
             android:gravity="center"
             android:paddingTop="20dp"

@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:background="@color/co_callback_nor"
+    android:background="#FFFFFF"
     android:orientation="vertical" >
 
     <TextView
@@ -23,14 +22,17 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/user_settings"
-            android:textColor="@color/co_policy"
+            android:layout_marginTop="@dimen/layout_padding"
+            android:layout_marginBottom="@dimen/layout_padding"
+            android:textColor="@color/co_callback_nor"
             android:textSize="@dimen/large_text" />
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/shp_login_edt"
+             android:layout_marginTop="@dimen/layout_padding"
+            android:background="@drawable/shp_setting_edt"
             android:orientation="horizontal" >
 
             <ImageView
@@ -39,12 +41,12 @@
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:src="@drawable/user" />
+                android:src="@drawable/user_accounts" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="@dimen/login_btn_height"
-                android:background="@color/co_login_btn" />
+                android:background="@color/co_callback_nor" />
 
             <EditText
                 android:id="@+id/idet"
@@ -57,7 +59,7 @@
                 android:paddingLeft="15dp"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:textColor="@color/co_login_btn"
+                android:textColor="@color/co_callback_nor"
                 android:textCursorDrawable="@null"
                 android:textSize="@dimen/normal_text" >
 
@@ -69,7 +71,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/shp_login_edt"
+            android:background="@drawable/shp_setting_edt"
             android:orientation="horizontal" >
 
             <ImageView
@@ -78,12 +80,12 @@
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:src="@drawable/password" />
+                android:src="@drawable/password_account" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="@dimen/login_btn_height"
-                android:background="@color/co_login_btn" />
+                android:background="@color/co_callback_nor" />
 
             <EditText
                 android:id="@+id/passet"
@@ -97,7 +99,7 @@
                 android:paddingLeft="15dp"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:textColor="@color/co_login_btn"
+                android:textColor="@color/co_callback_nor"
                 android:textCursorDrawable="@null"
                 android:textSize="@dimen/normal_text" >
 
@@ -110,15 +112,18 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/access_settings"
-            android:textColor="@color/co_policy"
+             android:layout_marginTop="@dimen/layout_padding"
+            android:layout_marginBottom="@dimen/layout_padding"
+          android:textColor="@color/co_callback_nor"
             android:textSize="@dimen/large_text" />
 
         <LinearLayout
             android:id="@+id/ll_cntry"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+             android:layout_marginTop="@dimen/layout_padding"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/shp_login_edt"
+            android:background="@drawable/shp_setting_edt"
             android:orientation="horizontal" >
 
             <ImageView
@@ -127,12 +132,12 @@
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:src="@drawable/united" />
+                android:src="@drawable/globe_account" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="@dimen/login_btn_height"
-                android:background="@color/co_login_btn" />
+                android:background="@color/co_callback_nor" />
 
             <TextView
                 android:id="@+id/sel_cntry"
@@ -146,7 +151,8 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="8dp"
                 android:singleLine="true"
-                android:textColor="@color/co_login_btn" />
+                android:textColor="@color/co_callback_nor"
+                android:textSize="@dimen/normal_text" />
 
             <requestFocus />
         </LinearLayout>
@@ -157,8 +163,8 @@
             android:layout_height="@dimen/login_btn_height"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:background="@drawable/sltr_login"
             android:text="@string/txt_update"
+            android:background="@drawable/sltr_login"
             android:textColor="@color/co_login_btn"
             android:textSize="@dimen/large_text"
             android:textStyle="bold" />

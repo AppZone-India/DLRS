@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_margin="10dp"
             android:background="@drawable/shp_login_edt"
             android:orientation="horizontal" >
 
@@ -24,10 +25,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/sltr_contacts_left"
                 android:gravity="center"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:text="@string/button_all_contacts"
                 android:textColor="@drawable/text_switch_button_color"
-                android:textSize="@dimen/normal_text" />
+                android:textSize="@dimen/small_text" />
 
             <TextView
                 android:id="@+id/linphoneContacts"
@@ -35,22 +36,22 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/sltr_contacts_right"
                 android:gravity="center"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:text="@string/button_sip_contacts"
                 android:textColor="@drawable/text_switch_button_color"
-                android:textSize="@dimen/normal_text" />
+                android:textSize="@dimen/small_text" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/newContact"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/center"
             android:gravity="center"
             android:text="+"
             android:textColor="@drawable/text_switch_button_color"
-            android:textSize="35sp" />
+            android:textSize="30sp" />
     </RelativeLayout>
 
     <EditText
@@ -61,6 +62,7 @@
         android:background="@drawable/sltr_search"
         android:gravity="center"
         android:hint="Search"
+        android:textColorHint="#aaaaaa"
         android:textColor="@drawable/text_button"
         android:textSize="@dimen/normal_text" />
 

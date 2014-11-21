@@ -1,14 +1,7 @@
 package com.sim2dial.dialer.compatibility;
 
-import org.linphone.mediastream.Log;
-
 import android.annotation.TargetApi;
-import android.content.Context;
 import android.view.Display;
-
-import com.google.android.gcm.GCMRegistrar;
-import com.sim2dial.dialer.Engine;
-import com.sim2dial.dialer.R;
 
 /*
  ApiEightPlus.java
@@ -39,35 +32,35 @@ public class ApiEightPlus
 	{
 		return display.getRotation();
 	}
-
-	public static void initPushNotificationService(Context context)
-	{
-
-		try
-		{
-			// Starting the push notification service
-			GCMRegistrar.checkDevice(context);
-			GCMRegistrar.checkManifest(context);
-			final String regId = GCMRegistrar.getRegistrationId(context);
-			String newPushSenderID = context.getString(R.string.push_sender_id);
-			String currentPushSenderID = Engine.getPref().getString(context.getString(R.string.push_sender_id_key), null);
-			if (regId.equals("") || currentPushSenderID == null || !currentPushSenderID.equals(newPushSenderID))
-			{
-				GCMRegistrar.register(context, newPushSenderID);
-
-				Log.d("Push Notification : storing current sender id = " + newPushSenderID);
-
-				Engine.getEditor().putString(context.getString(R.string.push_sender_id_key), newPushSenderID).commit();
-			}
-			else
-			{
-				Log.d("Push Notification : already registered with id = " + regId);
-				Engine.getEditor().putString(context.getString(R.string.push_reg_id_key), regId).commit();
-			}
-		}
-		catch (java.lang.UnsupportedOperationException e)
-		{
-			Log.i("Push Notification not activated");
-		}
-	}
+//
+//	public static void initPushNotificationService(Context context)
+//	{
+//
+//		try
+//		{
+//			// Starting the push notification service
+//			GCMRegistrar.checkDevice(context);
+//			GCMRegistrar.checkManifest(context);
+//			final String regId = GCMRegistrar.getRegistrationId(context);
+//			String newPushSenderID = context.getString(R.string.push_sender_id);
+//			String currentPushSenderID = Engine.getPref().getString(context.getString(R.string.push_sender_id_key), null);
+//			if (regId.equals("") || currentPushSenderID == null || !currentPushSenderID.equals(newPushSenderID))
+//			{
+//				GCMRegistrar.register(context, newPushSenderID);
+//
+//				Log.d("Push Notification : storing current sender id = " + newPushSenderID);
+//
+//				Engine.getEditor().putString(context.getString(R.string.push_sender_id_key), newPushSenderID).commit();
+//			}
+//			else
+//			{
+//				Log.d("Push Notification : already registered with id = " + regId);
+//				Engine.getEditor().putString(context.getString(R.string.push_reg_id_key), regId).commit();
+//			}
+//		}
+//		catch (java.lang.UnsupportedOperationException e)
+//		{
+//			Log.i("Push Notification not activated");
+//		}
+//	}
 }

@@ -1,0 +1,11 @@
+package com.sim2dial.dialer.setup;
+public enum SetupFragmentsEnum {
+	WELCOME,
+	MENU,
+	WIZARD,
+	WIZARD_CONFIRM,
+	LINPHONE_LOGIN,
+	GENERIC_LOGIN,
+	ECHO_CANCELLER_CALIBRATION,
+	SHOW_COUNTRY, SHOW_STATES, SHOW_CITIES;
+}

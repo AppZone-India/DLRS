@@ -2,17 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00000000"
+    android:background="#ffffff"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/header"
-        style="@style/Header"
-        android:text="@string/call_history" />
 
     <com.costum.android.widget.PullAndLoadListView
-        android:id="@+id/android:list"
+        android:id="@+id/recha"
         android:layout_width="fill_parent"
+       android:dividerHeight="1px"
+       android:divider="@color/co_list_divider"
         android:layout_height="fill_parent" />
 
 </LinearLayout>

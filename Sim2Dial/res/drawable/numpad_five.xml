@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
-        <layer-list >
-            <!-- <item android:drawable="@drawable/dial_btn_bg">
-                
-            </item> -->
-            <item android:drawable="@drawable/ic_five" />"
+       <layer-list >
+            <item>
+                <shape >
+                    <solid android:color="#ffff"/>
+                </shape>
+            </item> 
+            <item><bitmap android:tileMode="disabled" android:gravity="center" android:src="@drawable/ic_five_inv"  />
+          </item>
         </layer-list>
         
     </item> 
         
     <item>
     	 <layer-list >
-            <!-- <item android:drawable="@drawable/dial_btn_bg">
-                
-            </item> -->
-            <item android:drawable="@drawable/ic_five" />
+            <item>
+                <shape >
+                    <solid android:color="#ffff"/>
+                </shape>
+            </item> 
+             <item><bitmap android:tileMode="disabled" android:gravity="center" android:src="@drawable/ic_five" /></item>
         </layer-list>
      </item>
 </selector>

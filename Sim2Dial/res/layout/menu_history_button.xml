@@ -11,7 +11,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/content_description_history"
-        android:src="@drawable/history" />
+     />
     
     <!-- <TextView
         android:id="@+id/text"

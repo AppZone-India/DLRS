@@ -15,7 +15,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 package com.sim2dial.dialer.ui;
 
 import java.util.ArrayList;
@@ -36,29 +36,47 @@ import android.widget.LinearLayout;
  * @author Guillaume Beraudo
  *
  */
-public class Numpad extends LinearLayout implements AddressAware {
+public class Numpad extends LinearLayout implements AddressAware
+{
 
 	private boolean mPlayDtmf;
-	public void setPlayDtmf(boolean sendDtmf) {
+
+	public void setPlayDtmf(boolean sendDtmf)
+	{
 		this.mPlayDtmf = sendDtmf;
 	}
-private void applyTheme()
-{
-	
-	findViewById(R.id.Digit1).setBackground(Theme.selectorDrawable("ic_one"));
-	findViewById(R.id.Digit2).setBackground(Theme.selectorDrawable("ic_two"));
-	findViewById(R.id.Digit3).setBackground(Theme.selectorDrawable("ic_three"));
-	findViewById(R.id.Digit4).setBackground(Theme.selectorDrawable("ic_four"));
-	findViewById(R.id.Digit5).setBackground(Theme.selectorDrawable("ic_five"));
-	findViewById(R.id.Digit6).setBackground(Theme.selectorDrawable("ic_six"));
-	findViewById(R.id.Digit7).setBackground(Theme.selectorDrawable("ic_seven"));
-	findViewById(R.id.Digit8).setBackground(Theme.selectorDrawable("ic_eight"));
-	findViewById(R.id.Digit9).setBackground(Theme.selectorDrawable("ic_nine"));
-	findViewById(R.id.DigitHash).setBackground(Theme.selectorDrawable("ic_plus"));
-	findViewById(R.id.Erase).setBackground(Theme.selectorDrawable("ic_back"));
-	findViewById(R.id.Digit00).setBackground(Theme.selectorDrawable("ic_zero"));
+
+	private void applyTheme()
+	{
+
+		findViewById(R.id.Digit1).setBackground(
+				getResources().getDrawable(R.drawable.numpad_one));
+		findViewById(R.id.Digit2).setBackground(
+				getResources().getDrawable(R.drawable.numpad_two));
+		findViewById(R.id.Digit3).setBackground(
+				getResources().getDrawable(R.drawable.numpad_three));
+		findViewById(R.id.Digit4).setBackground(
+				getResources().getDrawable(R.drawable.numpad_four));
+		findViewById(R.id.Digit5).setBackground(
+				getResources().getDrawable(R.drawable.numpad_five));
+		findViewById(R.id.Digit6).setBackground(
+				getResources().getDrawable(R.drawable.numpad_six));
+		findViewById(R.id.Digit7).setBackground(
+				getResources().getDrawable(R.drawable.numpad_seven));
+		findViewById(R.id.Digit8).setBackground(
+				getResources().getDrawable(R.drawable.numpad_eight));
+		findViewById(R.id.Digit9).setBackground(
+				getResources().getDrawable(R.drawable.numpad_nine));
+		findViewById(R.id.DigitHash).setBackground(
+				getResources().getDrawable(R.drawable.numpad_sharp));
+		findViewById(R.id.Erase).setBackground(
+				getResources().getDrawable(R.drawable.numpad_star));
+		findViewById(R.id.Digit00).setBackground(
+				getResources().getDrawable(R.drawable.numpad_zero));
 	}
-	public Numpad(Context context, boolean playDtmf) {
+
+	public Numpad(Context context, boolean playDtmf)
+	{
 		super(context);
 		mPlayDtmf = playDtmf;
 		LayoutInflater.from(context).inflate(R.layout.numpad, this);
@@ -67,38 +85,57 @@ private void applyTheme()
 		applyTheme();
 	}
 
-	public Numpad(Context context, AttributeSet attrs) {
+	public Numpad(Context context, AttributeSet attrs)
+	{
 		super(context, attrs);
-		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Numpad);
-        mPlayDtmf = 1 == a.getInt(com.sim2dial.dialer.R.styleable.Numpad_play_dtmf, 1);
-        a.recycle();
+		TypedArray a = context
+				.obtainStyledAttributes(attrs, R.styleable.Numpad);
+		mPlayDtmf = 1 == a.getInt(
+				com.sim2dial.dialer.R.styleable.Numpad_play_dtmf, 1);
+		a.recycle();
 		LayoutInflater.from(context).inflate(R.layout.numpad, this);
 		setLongClickable(true);
 		applyTheme();
 	}
 
 	@Override
-	protected final void onFinishInflate() {
-		for (Digit v : retrieveChildren(this, Digit.class)) {
+	protected final void onFinishInflate()
+	{
+		for (Digit v : retrieveChildren(this, Digit.class))
+		{
 			v.setPlayDtmf(mPlayDtmf);
 		}
 		super.onFinishInflate();
 	}
-	public void setAddressWidget(AddressText address) {
-		for (AddressAware v : retrieveChildren(this, AddressAware.class)) {
+
+	public void setAddressWidget(AddressText address)
+	{
+		for (AddressAware v : retrieveChildren(this, AddressAware.class))
+		{
 			v.setAddressWidget(address);
 		}
 	}
 
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+	{
+		// TODO Auto-generated method stub
+		super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+	}
 
-	private final <T> Collection<T> retrieveChildren(ViewGroup viewGroup, Class<T> clazz) {
+	private final <T> Collection<T> retrieveChildren(ViewGroup viewGroup,
+			Class<T> clazz)
+	{
 		final Collection<T> views = new ArrayList<T>();
 
-		for (int i = 0; i < viewGroup.getChildCount(); i++) {
+		for (int i = 0; i < viewGroup.getChildCount(); i++)
+		{
 			View v = viewGroup.getChildAt(i);
-			if (v instanceof ViewGroup) {
+			if (v instanceof ViewGroup)
+			{
 				views.addAll(retrieveChildren((ViewGroup) v, clazz));
-			} else {
+			} else
+			{
 				if (clazz.isInstance(v))
 					views.add(clazz.cast(v));
 			}

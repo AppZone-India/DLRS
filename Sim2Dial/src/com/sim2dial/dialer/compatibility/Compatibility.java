@@ -201,11 +201,11 @@ public class Compatibility {
 		}
 	}
 	
-	public static void initPushNotificationService(Context context) {
-		if (Version.sdkAboveOrEqual(Version.API08_FROYO_22)) {
-			ApiEightPlus.initPushNotificationService(context);
-		}
-	}
+//	public static void initPushNotificationService(Context context) {
+//		if (Version.sdkAboveOrEqual(Version.API08_FROYO_22)) {
+//			ApiEightPlus.initPushNotificationService(context);
+//		}
+//	}
 
 	public static void copyTextToClipboard(Context context, String msg) {
 		if(Version.sdkAboveOrEqual(Version.API11_HONEYCOMB_30)) {

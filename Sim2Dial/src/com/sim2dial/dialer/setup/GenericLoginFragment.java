@@ -11,6 +11,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,6 +29,7 @@ import com.sim2dial.dialer.Engine;
 import com.sim2dial.dialer.LinphoneActivity;
 import com.sim2dial.dialer.LinphoneUtils;
 import com.sim2dial.dialer.R;
+import com.sim2dial.dialer.util.Theme;
 
 public class GenericLoginFragment extends Fragment implements OnClickListener, OnRemoteCompleated
 {
@@ -42,12 +45,34 @@ public class GenericLoginFragment extends Fragment implements OnClickListener, O
 		try
 		{
 			if (getArguments().getString("type").equals("update")) 
+				{
 				view = inflater.inflate(R.layout.account_setting, container, false);
-			else view = inflater.inflate(R.layout.setup_generic_login, container, false);
+				view.findViewById(R.id.login).setBackground(Theme.selectorDrawable("shp_voipcall"));
+					}
+			else 
+				{
+				view = inflater.inflate(R.layout.setup_generic_login, container, false);
+				
+				TextView textView=(TextView) view.findViewById(R.id.policy);
+				textView.setLinkTextColor(0xffffffff);
+				textView.setClickable(true);
+				textView.setMovementMethod(LinkMovementMethod.getInstance());
+				String text = getString(R.string.login_msg)+"<a href='http://sim2dial.com/terms/'> Service &amp; Privacy Policy </a>.";
+				textView.setText(Html.fromHtml(text));
+			
+				}
 		}
 		catch (Exception e)
 		{
-			 view = inflater.inflate(R.layout.setup_generic_login, container, false);
+			view = inflater.inflate(R.layout.setup_generic_login, container, false);
+		
+			TextView textView=(TextView) view.findViewById(R.id.policy);
+			textView.setLinkTextColor(0xffffffff);
+			textView.setClickable(true);
+			textView.setMovementMethod(LinkMovementMethod.getInstance());
+			String text = getString(R.string.login_msg)+"<a href='http://sim2dial.com/terms/'> Service &amp; Privacy Policy </a>.";
+			textView.setText(Html.fromHtml(text));
+		
 		}
 
 		login = (EditText) view.findViewById(R.id.idet);
@@ -59,7 +84,7 @@ public class GenericLoginFragment extends Fragment implements OnClickListener, O
 		login.setText(Engine.getPref().getString(Engine.PREF.LOGIN_ID.name(), ""));
 		password.setText(Engine.getPref().getString(Engine.PREF.PASSWORD.name(), ""));
 		if (Engine.getPref().getBoolean("noSelection", false)) sel_cntry.setText("Country not Supported");
-		else sel_cntry.setText(Engine.getPref().getString(Engine.PREF.COUNTRY.name(), "UK"));
+		else sel_cntry.setText(Engine.getPref().getString(Engine.PREF.COUNTRY.name(), "Please Select Country"));
 
 		return view;
 	}
@@ -79,13 +104,18 @@ public class GenericLoginFragment extends Fragment implements OnClickListener, O
 					}
 					else
 					{
-
-						Engine.getEditor().putString(Engine.PREF.LOGIN_ID.name(), login.getText().toString()).commit();
-						Engine.getEditor().putString(Engine.PREF.PASSWORD.name(), password.getText().toString()).commit();
+						
+						if (!Engine.getPref().getString(Engine.PREF.LOGIN_ID.name(), "").equals(login.getText().toString().trim())
+								|| !Engine.getPref().getString(Engine.PREF.PASSWORD.name(), "").equals(password.getText().toString().trim()))
+						{
+							Engine.getEditor().putString(Engine.PREF.APP_ID.name(), "").commit();
+							Engine.getEditor().putString(Engine.PREF.LOGIN_ID.name(), login.getText().toString()).commit();
+							Engine.getEditor().putString(Engine.PREF.PASSWORD.name(), password.getText().toString()).commit();
+						}
 						RemoteData remoteData = new RemoteData(LOGIN, GenericLoginFragment.this);
-						remoteData.setProgressDialog(getActivity());
+						remoteData.setProgressDialog(getActivity(),R.style.ProgressBar);
 						remoteData.execute(RemoteData.RESULT_JSON, LinphoneUtils.API_URL + "login_api.php?user=" + login.getText().toString() + "&password=" + password.getText().toString() + "&aid="
-								+ Engine.getPref().getString(Engine.PREF.APP_ID.name(), ""));
+								+ (Engine.getPref().getString(Engine.PREF.APP_ID.name(), "").equals("null")?"":Engine.getPref().getString(Engine.PREF.APP_ID.name(), "")));
 						// new GetLogin().execute(login.getText().toString(),
 						// password.getText().toString());
 						// SetupActivity.instance().genericLogIn(login.getText().toString(),password.getText().toString(),"server.nextstag.com");
@@ -105,7 +135,7 @@ public class GenericLoginFragment extends Fragment implements OnClickListener, O
 				Engine.getEditor().putString(Engine.PREF.LOGIN_ID.name(), login.getText().toString()).commit();
 				Engine.getEditor().putString(Engine.PREF.PASSWORD.name(), password.getText().toString()).commit();
 				RemoteData remoteData = new RemoteData(SELECT_COUNTRY, GenericLoginFragment.this);
-				remoteData.setProgressDialog(getActivity());
+				remoteData.setProgressDialog(getActivity(),R.style.ProgressBar);
 				remoteData.execute(RemoteData.RESULT_JSON, LinphoneUtils.API_URL + "countrylist_api.php");
 			// new GetCountry(getActivity()).execute();
 			break;
@@ -175,7 +205,6 @@ public class GenericLoginFragment extends Fragment implements OnClickListener, O
 					@Override
 					public void onClick(DialogInterface dialog, int which)
 					{
-						
 
 						if (ctry.get(which).get("country").toString().equals("Country not Supported"))
 						{
@@ -197,12 +226,14 @@ public class GenericLoginFragment extends Fragment implements OnClickListener, O
 
 							Engine.getEditor().putString(Engine.PREF.COUNTRY.name(), ctry.get(which).get("country").toString()).commit();
 							Engine.getEditor().putBoolean("noSelection", false).commit();
-//							RemoteData remoteData = new RemoteData(SELECT_STATES, ShowCountry.this);
-//							remoteData.setProgressDialog(getActivity());
-//							remoteData.execute(RemoteData.RESULT_PLANE_TEXT, LinphoneUtils.API_URL + "countrylist_api.php");			
-							//new GetStates().execute(o.toString());
+							// RemoteData remoteData = new
+							// RemoteData(SELECT_STATES, ShowCountry.this);
+							// remoteData.setProgressDialog(getActivity());
+							// remoteData.execute(RemoteData.RESULT_PLANE_TEXT,
+							// LinphoneUtils.API_URL + "countrylist_api.php");
+							// new GetStates().execute(o.toString());
 						}
-						sel_cntry.setText(Engine.getPref().getString(Engine.PREF.COUNTRY.name(), "UK"));
+						sel_cntry.setText(Engine.getPref().getString(Engine.PREF.COUNTRY.name(), "Please Select Country"));
 					}
 				}).setPositiveButton("Okay", new DialogInterface.OnClickListener()
 				{

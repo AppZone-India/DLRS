@@ -68,8 +68,9 @@ import android.widget.Toast;
 import com.sim2dial.dialer.LinphoneSimpleListener.LinphoneOnCallEncryptionChangedListener;
 import com.sim2dial.dialer.LinphoneSimpleListener.LinphoneOnCallStateChangedListener;
 import com.sim2dial.dialer.ui.AddressText;
-import com.sim2dial.dialer.ui.AvatarWithShadow;
+
 import com.sim2dial.dialer.ui.Numpad;
+import com.sim2dial.dialer.util.Theme;
 
 /**
  * @author Sylvain Berfini
@@ -114,7 +115,13 @@ public class InCallActivity extends FragmentActivity implements LinphoneOnCallSt
 	{
 		return instance != null;
 	}
-
+private void applyTheme()
+{
+	((ImageView) findViewById(R.id.dialer)).setImageDrawable(Theme.selectorDrawable("keypad"));;
+	((ImageView) findViewById(R.id.micro)).setImageDrawable(Theme.selectorDrawable("volume_min"));;
+	((ImageView) findViewById(R.id.pause)).setImageDrawable(Theme.selectorDrawable("play"));;
+	((ImageView) findViewById(R.id.speaker)).setImageDrawable(Theme.selectorDrawable("volume_up"));;
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -123,6 +130,7 @@ public class InCallActivity extends FragmentActivity implements LinphoneOnCallSt
 
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
 		setContentView(R.layout.incall);
+		applyTheme();
 		Intent i = getIntent();
 		String text = i.getStringExtra("Text");
 		String name = i.getStringExtra("Name");
@@ -170,6 +178,7 @@ public class InCallActivity extends FragmentActivity implements LinphoneOnCallSt
 			}
 
 			status.setMenuVisibility(false);
+			status.header.setVisibility(View.GONE);
 
 			Fragment callFragment;
 			if (isVideoEnabled)
@@ -313,20 +322,24 @@ public class InCallActivity extends FragmentActivity implements LinphoneOnCallSt
 
 				if (isSpeakerEnabled)
 				{
-					speaker.setImageResource(R.drawable.speaker_on);
+					speaker.setSelected(true);
+					//speaker.setImageResource(R.drawable.speaker_on);
 				}
 				else
 				{
-					speaker.setImageResource(R.drawable.speaker_off);
+					speaker.setSelected(false);
+					//speaker.setImageResource(R.drawable.speaker_off);
 				}
 
 				if (isMicMuted)
 				{
-					micro.setImageResource(R.drawable.micro_off);
+					micro.setSelected(false);
+					//micro.setImageResource(R.drawable.micro_off);
 				}
 				else
 				{
-					micro.setImageResource(R.drawable.micro_on);
+					micro.setSelected(true);
+					//micro.setImageResource(R.drawable.micro_on);
 				}
 
 				if (LinphoneManager.getLc().getCallsNb() > 1)
@@ -342,11 +355,12 @@ public class InCallActivity extends FragmentActivity implements LinphoneOnCallSt
 					List<LinphoneCall> pausedCalls = LinphoneUtils.getCallsInState(LinphoneManager.getLc(), Arrays.asList(State.Paused));
 					if (pausedCalls.size() == 1)
 					{
-						pause.setImageResource(R.drawable.pause_on);
+						pause.setSelected(true);//ImageResource(R.drawable.pause_on);
 					}
 					else
 					{
-						pause.setImageResource(R.drawable.pause_off);
+						pause.setSelected(false);
+					//	pause.setImageResource(R.drawable.pause_off);
 					}
 				}
 			}
@@ -529,7 +543,8 @@ public class InCallActivity extends FragmentActivity implements LinphoneOnCallSt
 	{
 		isSpeakerEnabled = true;
 		LinphoneManager.getInstance().routeAudioToSpeaker();
-		speaker.setImageResource(R.drawable.speaker_on);
+		speaker.setSelected(true);
+	//	speaker.setImageResource(R.drawable.speaker_on);
 		// video.setBackgroundResource(R.drawable.video_off);
 
 		LinphoneManager.stopProximitySensorForActivity(InCallActivity.this);
@@ -579,11 +594,13 @@ public class InCallActivity extends FragmentActivity implements LinphoneOnCallSt
 		lc.muteMic(isMicMuted);
 		if (isMicMuted)
 		{
-			micro.setImageResource(R.drawable.micro_off);
+			micro.setSelected(false);
+			//micro.setImageResource(R.drawable.micro_off);
 		}
 		else
 		{
-			micro.setImageResource(R.drawable.micro_on);
+			micro.setSelected(true);
+			//micro.setImageResource(R.drawable.micro_on);
 		}
 	}
 
@@ -593,13 +610,15 @@ public class InCallActivity extends FragmentActivity implements LinphoneOnCallSt
 		if (isSpeakerEnabled)
 		{
 			LinphoneManager.getInstance().routeAudioToSpeaker();
-			speaker.setImageResource(R.drawable.speaker_on);
+			speaker.setSelected(true);
+			//speaker.setImageResource(R.drawable.speaker_on);
 			LinphoneManager.getLc().enableSpeaker(isSpeakerEnabled);
 		}
 		else
 		{
 			LinphoneManager.getInstance().routeAudioToReceiver();
-			speaker.setImageResource(R.drawable.speaker_off);
+			speaker.setSelected(false);
+			//speaker.setImageResource(R.drawable.speaker_off);
 
 			boolean routeToBT = getResources().getBoolean(R.bool.route_audio_to_bluetooth_if_available);
 			if (!routeToBT) LinphoneManager.getLc().enableSpeaker(isSpeakerEnabled);
@@ -634,7 +653,8 @@ public class InCallActivity extends FragmentActivity implements LinphoneOnCallSt
 					isVideoCallPaused = true;
 					showAudioView();
 				}
-				pause.setImageResource(R.drawable.pause_on);
+				pause.setSelected(true);
+				//pause.setImageResource(R.drawable.pause_on);
 			}
 		}
 		else
@@ -651,7 +671,8 @@ public class InCallActivity extends FragmentActivity implements LinphoneOnCallSt
 						isVideoCallPaused = false;
 						showVideoView();
 					}
-					pause.setImageResource(R.drawable.pause_off);
+					pause.setSelected(false);
+				//	pause.setImageResource(R.drawable.pause_off);
 				}
 			}
 			else if (call != null)
@@ -662,7 +683,8 @@ public class InCallActivity extends FragmentActivity implements LinphoneOnCallSt
 					isVideoCallPaused = false;
 					showVideoView();
 				}
-				pause.setImageResource(R.drawable.pause_off);
+				pause.setSelected(false);
+				//pause.setImageResource(R.drawable.pause_off);
 			}
 		}
 	}
@@ -846,7 +868,7 @@ public class InCallActivity extends FragmentActivity implements LinphoneOnCallSt
 	{
 		if (numpad == null || numpad.getVisibility() != View.VISIBLE) { return; }
 
-		dialer.setImageResource(R.drawable.dialer_alt);
+	//	dialer.setImageResource(R.drawable.dialer_alt);
 		if (isAnimationDisabled)
 		{
 			numpad.setVisibility(View.GONE);
@@ -889,7 +911,7 @@ public class InCallActivity extends FragmentActivity implements LinphoneOnCallSt
 		}
 		else
 		{
-			dialer.setImageResource(R.drawable.dialer_alt_back);
+			//dialer.setImageResource(R.drawable.dialer_alt_back);
 			if (isAnimationDisabled)
 			{
 				numpad.setVisibility(View.VISIBLE);
@@ -1412,7 +1434,7 @@ public class InCallActivity extends FragmentActivity implements LinphoneOnCallSt
 		mControlsHandler = null;
 		mHandler = null;
 
-		unbindDrawables(findViewById(R.id.topLayout));
+		//unbindDrawables(findViewById(R.id.topLayout));
 		instance = null;
 		super.onDestroy();
 		System.gc();
@@ -1525,33 +1547,33 @@ public class InCallActivity extends FragmentActivity implements LinphoneOnCallSt
 		LinearLayout callView = (LinearLayout) inflater.inflate(R.layout.active_call_control_row, container, false);
 		setContactName(callView, lAddress, sipUri, resources);
 		displayCallStatusIconAndReturnCallPaused(callView, call);
-		setRowBackground(callView, index);
+		//setRowBackground(callView, index);
 		tim = (Chronometer) callView.findViewById(R.id.callTimer);
 		registerCallDurationTimer(tim, call);
 		// registerCallDurationTimer(callView, call);
 		callsList.addView(callView);
 
 		// Image Row
-		LinearLayout imageView = (LinearLayout) inflater.inflate(R.layout.active_call_image_row, container, false);
-		Uri pictureUri = LinphoneUtils.findUriPictureOfContactAndSetDisplayName(lAddress, imageView.getContext().getContentResolver());
-		displayOrHideContactPicture(imageView, pictureUri, false);
-		callsList.addView(imageView);
-
-		callView.setTag(imageView);
-		callView.setOnClickListener(new OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				if (v.getTag() != null)
-				{
-					View imageView = (View) v.getTag();
-					if (imageView.getVisibility() == View.VISIBLE) imageView.setVisibility(View.GONE);
-					else imageView.setVisibility(View.VISIBLE);
-					callsList.invalidate();
-				}
-			}
-		});
+//		LinearLayout imageView = (LinearLayout) inflater.inflate(R.layout.active_call_image_row, container, false);
+//		Uri pictureUri = LinphoneUtils.findUriPictureOfContactAndSetDisplayName(lAddress, imageView.getContext().getContentResolver());
+//		displayOrHideContactPicture(imageView, pictureUri, false);
+//		callsList.addView(imageView);
+//
+//		callView.setTag(imageView);
+//		callView.setOnClickListener(new OnClickListener()
+//		{
+//			@Override
+//			public void onClick(View v)
+//			{
+//				if (v.getTag() != null)
+//				{
+//					View imageView = (View) v.getTag();
+//					if (imageView.getVisibility() == View.VISIBLE) imageView.setVisibility(View.GONE);
+//					else imageView.setVisibility(View.VISIBLE);
+//					callsList.invalidate();
+//				}
+//			}
+//		});
 	}
 
 	private void setContactName(LinearLayout callView, LinphoneAddress lAddress, String sipUri, Resources resources)
@@ -1613,32 +1635,32 @@ public class InCallActivity extends FragmentActivity implements LinphoneOnCallSt
 
 	private void displayOrHideContactPicture(LinearLayout callView, Uri pictureUri, boolean hide)
 	{
-		AvatarWithShadow contactPicture = (AvatarWithShadow) callView.findViewById(R.id.contactPicture);
+		ImageView contactPicture = (ImageView) callView.findViewById(R.id.contactPicture);
 		if (pictureUri != null)
 		{
-			LinphoneUtils.setImagePictureFromUri(callView.getContext(), contactPicture.getView(), Uri.parse(pictureUri.toString()), R.drawable.unknown_small);
+			LinphoneUtils.setImagePictureFromUri(callView.getContext(), contactPicture, Uri.parse(pictureUri.toString()), R.drawable.ic_contact);
 		}
 		callView.setVisibility(hide ? View.GONE : View.VISIBLE);
 	}
 
-	private void setRowBackground(LinearLayout callView, int index)
-	{
-		int backgroundResource;
-		if (index == 0)
-		{
-			// backgroundResource = active ?
-			// R.drawable.cell_call_first_highlight :
-			// R.drawable.cell_call_first;
-			backgroundResource = R.drawable.cell_call_first;
-		}
-		else
-		{
-			// backgroundResource = active ? R.drawable.cell_call_highlight :
-			// R.drawable.cell_call;
-			backgroundResource = R.drawable.cell_call;
-		}
-		callView.setBackgroundResource(backgroundResource);
-	}
+//	private void setRowBackground(LinearLayout callView, int index)
+//	{
+//	//	int backgroundResource;
+////		if (index == 0)
+////		{
+////			// backgroundResource = active ?
+//			// R.drawable.cell_call_first_highlight :
+//			// R.drawable.cell_call_first;
+//			//backgroundResource = R.drawable.cell_call_first;
+////		}
+////		else
+////		{
+//			// backgroundResource = active ? R.drawable.cell_call_highlight :
+//			// R.drawable.cell_call;
+//			//backgroundResource = R.drawable.cell_call;
+////		}
+//		//callView.setBackgroundResource(backgroundResource);
+//	}
 
 	private void registerCallDurationTimer(View v, LinphoneCall call)
 	{

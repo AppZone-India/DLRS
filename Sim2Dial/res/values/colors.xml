@@ -6,14 +6,14 @@
     <color name="co_rate_txt">#EDAE44</color>
     <color name="co_list_divider">#D6D2C9</color>
     <color name="co_call_nor">#FFB402</color>
-    <color name="co_callback_nor">#929292</color>
+    <color name="co_callback_nor">#A9A9A9</color>
     <color name="co_call_pressed">#EFA400</color>
     <color name="co_callback_pressed">#828282</color>
     <color name="co_policy">#BF8300</color>
     <color name="co_login_btn">#FFFF</color>
     <color name="co_login_pressed">#FFCCCCCC</color>
     <color name="co_login_nor">#FF000000</color>
-    <color name="co_header_bg">#FFFF9955</color>
+    <color name="co_header_bg">#FFB402</color>
     <!--  -->
     <color name="account_inactive">#FF646464</color>
     <color name="account_unregistered">#FFFFC200</color>

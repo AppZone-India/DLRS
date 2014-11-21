@@ -31,10 +31,10 @@ public class MyMenuAdapter extends SimpleAdapter
 		else if (ss.equals("Call History")) return R.drawable.ic_call_history;
 		else if (ss.equals("Credit History")) return R.drawable.ic_credit_history;
 		else if (ss.equals("Privacy Policy")) return R.drawable.ic_privacy;
-		else if (ss.equals("About")) return R.drawable.about;
+		
 		else if (ss.equals("Top Up")) return R.drawable.ic_topup;
-		else if (ss.equals("Refill-History")) return R.drawable.sltr_refill_his;
-		else return R.drawable.logout;
+		
+		else return R.drawable.ic_topup;
 	}
 
 	@Override

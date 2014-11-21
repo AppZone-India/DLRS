@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res/com.sim2dial.dialer"
     android:id="@+id/topLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res/org.linphone"
-    android:background="@drawable/bg_menu">
-    
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true">
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/co_header_bg" >
 
         <LinearLayout
             android:id="@+id/fragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal" />
-	
-		<TableLayout 
-	        android:id="@+id/calls"
-	    	android:paddingTop="40dp"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:gravity="top" />
+
+        <TableLayout
+            android:id="@+id/calls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:paddingTop="40dp" />
 
         <fragment
             android:id="@+id/status"
             android:name="com.sim2dial.dialer.StatusFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             tools:layout="@layout/status" />
-        
     </FrameLayout>
 
     <ImageView
@@ -38,29 +40,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_marginTop="40dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/content_description_switch_camera"
-        android:layout_marginTop="40dp"
-        android:visibility="invisible"
-        android:src="@drawable/switch_camera" />
-    
-    <com.sim2dial.dialer.ui.Numpad
-        android:id="@+id/numpad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="false"
-        android:layout_below="@id/switchCamera"
-        android:layout_centerInParent="true"
-        android:background="@drawable/bg_menu"
+        android:src="@drawable/switch_camera"
         android:visibility="invisible" />
 
     <LinearLayout
         android:id="@+id/menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="right"
+        android:layout_centerInParent="true"
+        android:gravity="end"
         android:orientation="vertical" >
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:layout_gravity="center_horizontal"
+         >
+
+            
+
+           <com.sim2dial.dialer.ui.Numpad
+                android:id="@+id/numpad"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/white"
+                android:visibility="gone" >
+            </com.sim2dial.dialer.ui.Numpad>
+        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/l1"
@@ -68,25 +79,24 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:visibility="gone" >
-            
-            <TextView 
-	           	android:layout_width="match_parent"
-	           	android:layout_height="wrap_content"
-	           	android:visibility="invisible"
-                android:layout_weight="0.25"/>
 
-	        <TextView
-	           	android:id="@+id/transfer"
-	           	android:background="@drawable/options_transfer"
-	        	android:text="@string/button_transfer"
-	        	android:gravity="center"
-	        	android:paddingTop="40dp"
-	        	android:textColor="@drawable/text_incall_button_color"
-        		android:visibility="invisible"
-	           	android:layout_width="match_parent"
-	           	android:layout_height="wrap_content"
-                android:layout_weight="0.75" />
-	       
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.25"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/transfer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.75"
+                android:background="@drawable/options_transfer"
+                android:gravity="center"
+                android:paddingTop="40dp"
+                android:text="@string/button_transfer"
+                android:textColor="@drawable/text_incall_button_color"
+                android:visibility="invisible" />
         </LinearLayout>
 
         <LinearLayout
@@ -95,77 +105,73 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:visibility="gone" >
-            
-            <TextView 
-	           	android:layout_width="match_parent"
-	           	android:layout_height="wrap_content"
-	           	android:visibility="invisible"
-                android:layout_weight="0.25"/>
-            
-	        <TextView
-				android:id="@+id/addCall"
-	       		android:background="@drawable/options_add_call_alt"
-	        	android:text="@string/button_add_call"
-	        	android:gravity="center"
-	        	
-	        	android:textColor="@drawable/text_incall_button_color"
-        		android:visibility="invisible"
-	           	android:layout_width="match_parent"
-	           	android:layout_height="wrap_content"
-                android:layout_weight="0.75" />
-	       
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.25"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/addCall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.75"
+                android:background="@drawable/options_add_call_alt"
+                android:gravity="center"
+                android:text="@string/button_add_call"
+                android:textColor="@drawable/text_incall_button_color"
+                android:visibility="invisible" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal"
-            android:background="@drawable/bg_menu">
-	        
-           <ImageView
-	            android:id="@+id/pause"
-	            android:layout_width="match_parent"
-	            android:layout_height="wrap_content"
-	            android:layout_gravity="center"
-	            android:layout_weight="1"
-				android:adjustViewBounds="true"
-				android:scaleType="fitCenter"
-	            android:contentDescription="@string/content_description_dialer"
-	            android:src="@drawable/pause_off" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/pause"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/content_description_dialer"
+                android:scaleType="fitCenter"
+                android:src="@drawable/pause_off" />
 
             <ImageView
                 android:id="@+id/micro"
                 android:layout_width="match_parent"
-	            android:layout_height="wrap_content"
-	            android:layout_gravity="center"
-	            android:layout_weight="1"
-				android:adjustViewBounds="true"
-				android:scaleType="fitCenter"
-	            android:contentDescription="@string/content_description_dialer"
-	            android:src="@drawable/micro_on"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/content_description_dialer"
+                android:scaleType="fitCenter"
+                android:src="@drawable/micro_on" />
 
             <ImageView
                 android:id="@+id/speaker"
-                android:src="@drawable/speaker_off"
-	            android:layout_width="match_parent"
-	            android:layout_height="wrap_content"
-	            android:layout_gravity="center"
-	            android:layout_weight="1"
-				android:adjustViewBounds="true"
-				android:scaleType="fitCenter"
-	            android:contentDescription="@string/content_description_dialer" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/content_description_dialer"
+                android:scaleType="fitCenter"
+                android:src="@drawable/speaker_off" />
 
             <ImageView
                 android:id="@+id/dialer"
-                android:src="@drawable/dialer_alt"
-	            android:layout_width="match_parent"
-	            android:layout_height="wrap_content"
-	            android:layout_gravity="center"
-	            android:layout_weight="1"
-				android:adjustViewBounds="true"
-				android:scaleType="fitCenter"
-	            android:contentDescription="@string/content_description_dialer" />
-            
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/content_description_dialer"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dialer_alt" />
         </LinearLayout>
 
         <LinearLayout
@@ -183,31 +189,30 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/pause_off"
                 android:visibility="gone" />
-            
+
             <ImageView
                 android:id="@+id/conference"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/content_description_conference"
                 android:scaleType="fitXY"
-                android:src="@drawable/conference" />
+                android:src="@drawable/conference"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/hangUp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/login_btn_height"
+                android:layout_margin="40dp"
                 android:layout_weight="0.97"
                 android:adjustViewBounds="true"
-                android:contentDescription="@string/content_description_hang_up"
-                android:scaleType="fitXY"
+                android:background="@drawable/sltr_login"
                 android:gravity="center"
+                android:text="Hang Up"
                 android:textSize="20dp"
- 				android:text="Hang Up"
- 				android:textStyle="bold"
-                android:background="@drawable/red_selected" />
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/dialer1"
@@ -219,9 +224,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/dialer_alt"
                 android:visibility="gone" />
-            
         </LinearLayout>
-        
     </LinearLayout>
 
 </RelativeLayout>

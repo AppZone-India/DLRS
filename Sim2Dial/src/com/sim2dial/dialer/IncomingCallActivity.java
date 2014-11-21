@@ -26,6 +26,7 @@ import com.sim2dial.dialer.R.drawable;
 import com.sim2dial.dialer.R.id;
 import com.sim2dial.dialer.R.layout;
 import com.sim2dial.dialer.R.string;
+
 import org.linphone.core.LinphoneAddress;
 import org.linphone.core.LinphoneCall;
 import org.linphone.core.LinphoneCall.State;
@@ -33,7 +34,6 @@ import org.linphone.core.LinphoneCallParams;
 import org.linphone.mediastream.Log;
 
 import com.sim2dial.dialer.LinphoneSimpleListener.LinphoneOnCallStateChangedListener;
-import com.sim2dial.dialer.ui.AvatarWithShadow;
 import com.sim2dial.dialer.ui.LinphoneSliders;
 import com.sim2dial.dialer.ui.LinphoneSliders.LinphoneSliderTriggered;
 
@@ -42,6 +42,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,7 +58,7 @@ public class IncomingCallActivity extends Activity implements LinphoneOnCallStat
 	
 	private TextView mNameView;
 	private TextView mNumberView;
-	private AvatarWithShadow mPictureView;
+	private ImageView mPictureView;
 	private LinphoneCall mCall;
 	private LinphoneSliders mIncomingCallWidget;
 	private boolean callstore=false;
@@ -77,7 +78,7 @@ public class IncomingCallActivity extends Activity implements LinphoneOnCallStat
 
 		mNameView = (TextView) findViewById(R.id.incoming_caller_name);
 		mNumberView = (TextView) findViewById(R.id.incoming_caller_number);
-		mPictureView = (AvatarWithShadow) findViewById(R.id.incoming_picture);
+		mPictureView = (ImageView) findViewById(R.id.incoming_picture);
 
         // set this flag so this activity will stay in front of the keyguard
         int flags = WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON;
@@ -116,7 +117,7 @@ public class IncomingCallActivity extends Activity implements LinphoneOnCallStat
 		LinphoneAddress address = mCall.getRemoteAddress();
 		// May be greatly sped up using a drawable cache
 		Uri uri = LinphoneUtils.findUriPictureOfContactAndSetDisplayName(address, getContentResolver());
-		LinphoneUtils.setImagePictureFromUri(this, mPictureView.getView(), uri, R.drawable.unknown_small);
+		LinphoneUtils.setImagePictureFromUri(this, mPictureView, uri, R.drawable.ic_contact);
 
 		// To be done after findUriPictureOfContactAndSetDisplayName called
 		mNameView.setText(address.getDisplayName());

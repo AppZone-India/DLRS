@@ -8,11 +8,11 @@
 	android:orientation="horizontal"
 	android:padding="10dp">
 	
-	<com.sim2dial.dialer.ui.AvatarWithShadow
+	<ImageView
 	    android:id="@+id/contactPicture"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
     	android:gravity="center_horizontal|top"
-	    linphone:picture="@drawable/unknown_small" />
+	    linphone:picture="@drawable/ic_contact" />
 	    
 </TableRow>

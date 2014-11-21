@@ -50,7 +50,7 @@ public class ApiSixteenPlus {
 				new Notification.Builder(context)
 						.setContentTitle(title)
 						.setContentText(msg)
-						.setSmallIcon(R.drawable.chat_icon_over)
+						.setSmallIcon(R.drawable.ic_contact)
 						.setAutoCancel(true)
 						.setDefaults(
 								Notification.DEFAULT_LIGHTS

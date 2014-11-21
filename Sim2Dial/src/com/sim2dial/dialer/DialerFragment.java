@@ -1,23 +1,5 @@
 package com.sim2dial.dialer;
 
-/*
- DialerFragment.java
- Copyright (C) 2012  Belledonne Communications, Grenoble, France
-
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License
- as published by the Free Software Foundation; either version 2
- of the License, or (at your option) any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- */
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -44,8 +26,6 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ns.kgraphicsengin.RemoteData;
 import com.ns.kgraphicsengin.RemoteData.OnRemoteCompleated;
@@ -60,9 +40,6 @@ import com.sim2dial.dialer.ui.CallButton;
 import com.sim2dial.dialer.ui.EraseButton;
 import com.sim2dial.dialer.util.Theme;
 
-/**
- * @author Sylvain Berfini
- */
 public class DialerFragment extends Fragment implements OnLongClickListener, OnClickListener, OnRemoteCompleated
 {
 	private static DialerFragment	instance;
@@ -76,7 +53,7 @@ public class DialerFragment extends Fragment implements OnLongClickListener, OnC
 	private ImageView				mAddContact;
 	private OnClickListener			addContactListener, cancelListener, transferListener;
 	private boolean					shouldEmptyAddressField	= true;
-TextView select_contry;
+//TextView select_contry;
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -273,9 +250,9 @@ TextView select_contry;
 	{
 		instance = this;
 		View view = inflater.inflate(R.layout.dialer, container, false);
-		select_contry=(TextView) view.findViewById(R.id.country);
-		select_contry.setOnClickListener(this);
-		select_contry.setText(Engine.getPref().getString(Engine.PREF.COUNTRY.name(), "UK"));
+	//	select_contry=(TextView) view.findViewById(R.id.country);
+	//	select_contry.setOnClickListener(this);
+	//	select_contry.setText(Engine.getPref().getString(Engine.PREF.COUNTRY.name(), "UK"));
 		
 //		  EditText ed1 = (EditText) view.findViewById(R.id.test);
 //		  ed1.setOnLongClickListener(new View.OnLongClickListener() {
@@ -303,10 +280,10 @@ TextView select_contry;
 		erase.setAddressWidget(mAddress);
 
 		mCall = (CallButton) view.findViewById(R.id.Call);
-		mCall.setBackground(Theme.selectorDrawable("shp_voipcall"));
+		mCall.setBackground(Theme.selectorDrawable("shp_callback"));
 		// mCall.setEnabled(false);
 		mCallBack = (CallBackButton) view.findViewById(R.id.CallBack);
-		mCallBack.setBackground(Theme.selectorDrawable("shp_callback"));
+		mCallBack.setBackground(Theme.selectorDrawable("shp_voipcall"));
 		// mCallBack.setEnabled(false);
 
 		mCallBack.setAddressWidget(mAddress);
@@ -429,6 +406,7 @@ TextView select_contry;
 	public void onResume()
 	{
 		super.onResume();
+		//((LinphoneActivity)getActivity()).dialer.setSelected(true);
 		if (LinphoneActivity.isInstanciated())
 		{
 			// LinphoneActivity.instance().selectMenu(FragmentsAvailable.DIALER);
@@ -477,14 +455,14 @@ TextView select_contry;
 				mCall.resetClickListener();
 			}
 			mAddContact.setEnabled(true);
-			mAddContact.setImageResource(R.drawable.cancel);
+		//	mAddContact.setImageResource(R.drawable.cancel);
 			mAddContact.setOnClickListener(cancelListener);
 		}
 		else
 		{
 			// mCall.setImageResource(R.drawable.call);
 			mAddContact.setEnabled(true);
-			mAddContact.setImageResource(R.drawable.add_contact);
+		//	mAddContact.setImageResource(R.drawable.add_contact);
 			mAddContact.setOnClickListener(addContactListener);
 			enableDisableAddContact();
 		}
@@ -536,7 +514,7 @@ TextView select_contry;
 		{
 			case R.id.country:
 				RemoteData remoteData = new RemoteData(SELECT_COUNTRY, DialerFragment.this);
-				remoteData.setProgressDialog(getActivity());
+				remoteData.setProgressDialog(getActivity(),R.style.ProgressBar);
 				remoteData.execute(RemoteData.RESULT_JSON, LinphoneUtils.API_URL + "countrylist_api.php");
 			break;
 
@@ -605,7 +583,7 @@ TextView select_contry;
 							// LinphoneUtils.API_URL + "countrylist_api.php");
 							// new GetStates().execute(o.toString());
 						}
-						select_contry.setText(Engine.getPref().getString(Engine.PREF.COUNTRY.name(), "UK"));
+						//select_contry.setText(Engine.getPref().getString(Engine.PREF.COUNTRY.name(), "UK"));
 					}
 				}).setPositiveButton("Okay", new DialogInterface.OnClickListener()
 				{

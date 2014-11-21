@@ -5,12 +5,12 @@
     android:background="@color/white"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/toolsbar_background"
-        android:orientation="horizontal" >
+        android:layout_height="@dimen/login_btn_height"
+        android:background="@color/co_header_bg" >
 
+        <!--
         <ImageView
             android:id="@+id/blank"
             android:layout_width="0dp"
@@ -21,50 +21,35 @@
             android:contentDescription="@string/content_description_delete"
             android:gravity="center"
             android:scaleType="centerCrop" />
-
-        <TextView
-            android:id="@+id/deleteAll"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"
-            android:background="@drawable/history_delete"
-            android:contentDescription="@string/content_description_delete"
-            android:gravity="center"
-            android:paddingTop="20dp"
-            android:scaleType="centerCrop"
-            android:text="@string/button_delete_all"
-            android:textColor="@drawable/text_button" />
+        -->
 
         <TextView
             android:id="@+id/allCalls"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"
-            android:background="@drawable/history_all"
-            android:contentDescription="@string/content_description_all_calls"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:background="@null"
             android:gravity="center"
-            android:paddingTop="15dp"
-            android:scaleType="centerCrop"
             android:text="@string/button_all_call"
-            android:textColor="@drawable/text_switch_button_color" />
+            android:textColor="@drawable/text_switch_button_color"
+            android:textSize="@dimen/large_text" />
 
-        <TextView
+        <!--
+             <TextView
             android:id="@+id/missedCalls"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:adjustViewBounds="true"
-            android:background="@drawable/history_missed"
-            android:contentDescription="@string/content_description_missed_calls"
+            android:background="@null"
+       
             android:gravity="center"
-            android:paddingTop="15dp"
-            android:scaleType="centerCrop"
             android:text="@string/button_missed_call"
             android:textColor="@drawable/text_switch_button_color" />
+        -->
 
-        <TextView
+
+        <!--
+             <TextView
             android:id="@+id/edit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -77,8 +62,23 @@
             android:scaleType="centerCrop"
             android:text="@string/button_edit"
             android:textColor="@drawable/text_button" />
+        -->
 
         <TextView
+            android:id="@+id/deleteAll"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/layout_padding"
+            android:background="@null"
+            android:gravity="center"
+            android:text="@string/button_delete_all"
+            android:textColor="@drawable/text_button"
+            android:textSize="@dimen/large_text" />
+
+        <!--
+             <TextView
             android:id="@+id/ok"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -92,15 +92,16 @@
             android:text="@string/button_ok"
             android:textColor="@drawable/text_button"
             android:visibility="gone" />
-    </LinearLayout>
+        -->
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/historyList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:cacheColorHint="@color/transparent"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp" />
+        android:divider="#EDEDED"
+        android:dividerHeight="1px" />
 
     <TextView
         android:id="@+id/noCallHistory"
@@ -119,7 +120,6 @@
         android:gravity="center"
         android:text="@string/no_missed_call_history"
         android:textAppearance="@android:style/TextAppearance.Large"
-        android:textColor="@drawable/text_color"
-        android:visibility="gone" />
+        android:textColor="@drawable/text_color" />
 
 </LinearLayout>

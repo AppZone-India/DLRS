@@ -6,6 +6,7 @@ import com.sim2dial.dialer.R;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,11 +20,12 @@ public class CustomAlertDialog {
 	public static  void showAlert(final Context activity,Drawable icon, View view, String title, String msg,boolean isPositive,String positiveText, boolean isNegative,String negativeText, boolean iscancilable,final ClickPos obj) 
 	{
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-
+	
 		if(icon!=null)
 		builder.setIcon(icon);
 		if(title!="")
 		builder.setTitle(title);
+	
 		if(msg!="")
 			builder.setMessage(msg);
 		if(view!=null){
@@ -79,7 +81,16 @@ public class CustomAlertDialog {
 	//	}
 
 		AlertDialog dialog = builder.create();
+	
 		dialog.show();
+
+int dividerId = dialog.getContext().getResources().getIdentifier("android:id/titleDivider", null, null);
+View divider = dialog.findViewById(dividerId);
+//dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0x55555555));
+divider.setBackgroundColor(activity.getResources().getColor(R.color.co_header_bg));
+int textViewId = dialog.getContext().getResources().getIdentifier("android:id/alertTitle", null, null);
+TextView tv = (TextView) dialog.findViewById(textViewId);
+tv.setTextColor(activity.getResources().getColor(R.color.co_header_bg));
 
 	}
 	

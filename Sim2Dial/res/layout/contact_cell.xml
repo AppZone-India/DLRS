@@ -13,8 +13,8 @@
         android:layout_gravity="left"
         android:paddingLeft="25dp"
         android:textColor="@color/white"
-        android:textSize="22sp"
-        android:textStyle="bold"
+        android:textSize="16sp"
+       
         android:background="@color/co_callback_nor"
         android:text="#" />
 
@@ -32,7 +32,7 @@
             android:layout_height="50dip"
             android:paddingLeft="1dp"
             android:paddingRight="1dp"
-            android:src="@drawable/ic_contact_picture_180_holo_light" />
+            android:src="@drawable/ic_contact" />
 
         <RelativeLayout
             android:id="@+id/condisp"
@@ -49,9 +49,9 @@
                 android:layout_alignParentTop="true"
                 android:paddingLeft="5dp"
                 android:text="##"
-                android:textColor="#000000"
+                android:textColor="#444444"
                 android:textSize="13dp"
-                android:textStyle="bold" />
+               />
 
             <TextView
                 android:id="@+id/num"
@@ -60,7 +60,7 @@
                 android:layout_below="@+id/name"
                 android:layout_marginLeft="10dp"
                 android:text="##"
-                android:textColor="#000000"
+                android:textColor="#444444"
                 android:textSize="13dp" />
 
             <ImageView
@@ -92,7 +92,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
                 android:background="@null"
-                android:src="@drawable/btn_call_selec" />
+                />
         </FrameLayout>
     </LinearLayout>
 

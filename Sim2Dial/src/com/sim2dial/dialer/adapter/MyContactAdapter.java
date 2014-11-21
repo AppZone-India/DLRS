@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds;
@@ -29,29 +30,35 @@ import com.sim2dial.dialer.LinphoneActivity;
 import com.sim2dial.dialer.PhoneBookItemInfo;
 import com.sim2dial.dialer.R;
 import com.sim2dial.dialer.util.ImageViewRounded;
+import com.sim2dial.dialer.util.Theme;
 
-public class MyContactAdapter extends SimpleCursorAdapter implements SectionIndexer, OnAlphabaticPosition
+public class MyContactAdapter extends SimpleCursorAdapter implements
+		SectionIndexer, OnAlphabaticPosition
 {
 
-	Context							ctxt;
-	private static final int		TYPE_HEADER	= 1;
-	private static final int		TYPE_NORMAL	= 0;
+	Context ctxt;
+	private static final int TYPE_HEADER = 1;
+	private static final int TYPE_NORMAL = 0;
 
-	private static final int		TYPE_COUNT	= 2;
+	private static final int TYPE_COUNT = 2;
 
-	private AlphabetIndexer			indexer;
+	private AlphabetIndexer indexer;
 
-	private int[]					usedSectionNumbers;
+	private int[] usedSectionNumbers;
 
-	private Map<Integer, Integer>	sectionToPosition;
+	private Map<Integer, Integer> sectionToPosition;
+	Drawable callbtn;
 
-	public MyContactAdapter(Context context, int layout, Cursor c, String[] from, int[] to)
+	public MyContactAdapter(Context context, int layout, Cursor c,
+			String[] from, int[] to)
 	{
 		super(context, layout, c, from, to);
 		ctxt = context;
-		indexer = new AlphabetIndexer(c, c.getColumnIndexOrThrow("display_name"), "#ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+		indexer = new AlphabetIndexer(c,
+				c.getColumnIndexOrThrow("display_name"),
+				"#ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 		sectionToPosition = new TreeMap<Integer, Integer>();
-
+		callbtn = Theme.selectorDrawable("ic_call");
 		final int count = super.getCount();
 		int i;
 		for (i = count - 1; i >= 0; i--)
@@ -82,21 +89,24 @@ public class MyContactAdapter extends SimpleCursorAdapter implements SectionInde
 
 		try
 		{
-			bookItemInfo.setIsStred(cursor.getString(cursor.getColumnIndex("starred")));
-			bookItemInfo.setContactID(cursor.getString(cursor.getColumnIndex(CommonDataKinds.Phone.CONTACT_ID)));
-			bookItemInfo.setName(cursor.getString(cursor.getColumnIndex("display_name")));
+			bookItemInfo.setIsStred(cursor.getString(cursor
+					.getColumnIndex("starred")));
+			bookItemInfo.setContactID(cursor.getString(cursor
+					.getColumnIndex(CommonDataKinds.Phone.CONTACT_ID)));
+			bookItemInfo.setName(cursor.getString(cursor
+					.getColumnIndex("display_name")));
 			String n = cursor.getString(cursor.getColumnIndex("data1"));
-			if (n.trim().startsWith("+")) n = n.replace("+", "00");
+			if (n.trim().startsWith("+"))
+				n = n.replace("+", "00");
 			bookItemInfo.setNumber(n);
 			bookItemInfo.setUserData(cursor.getPosition());
 
-		}
-		catch (Exception e)
+		} catch (Exception e)
 		{
 		}
 		ImageViewRounded img = (ImageViewRounded) v1.findViewById(R.id.img);
 		ImageButton imb = (ImageButton) v1.findViewById(R.id.imb);
-
+		imb.setImageDrawable(callbtn);
 		View v;
 		v = v1.findViewById(R.id.condisp);
 		v.setTag(bookItemInfo);
@@ -107,7 +117,8 @@ public class MyContactAdapter extends SimpleCursorAdapter implements SectionInde
 			public void onClick(View view)
 			{
 				PhoneBookItemInfo pi = (PhoneBookItemInfo) view.getTag();
-				LinphoneActivity.instance().setAddressAndGoToDialer(pi.getNumber().toString());
+				LinphoneActivity.instance().setAddressAndGoToDialer(
+						pi.getNumber().toString());
 				/*
 				 * if (!(SipHome.mTabsAdapter.mCurrentPosition <= 0))
 				 * SipHome.mViewPager.setCurrentItem(0, true); DialerFragment
@@ -121,8 +132,12 @@ public class MyContactAdapter extends SimpleCursorAdapter implements SectionInde
 		v = v1.findViewById(R.id.fav);
 		v.setTag(bookItemInfo);
 
-		if (bookItemInfo.getIsStred().equals("1")) ((ImageView) v).setImageDrawable(ctxt.getResources().getDrawable(R.drawable.fev));
-		else ((ImageView) v).setImageDrawable(ctxt.getResources().getDrawable(R.drawable.fev_inv));
+		if (bookItemInfo.getIsStred().equals("1"))
+			((ImageView) v).setImageDrawable(ctxt.getResources().getDrawable(
+					R.drawable.fev));
+		else
+			((ImageView) v).setImageDrawable(ctxt.getResources().getDrawable(
+					R.drawable.fev_inv));
 
 		v.setOnClickListener(new View.OnClickListener()
 		{
@@ -136,17 +151,22 @@ public class MyContactAdapter extends SimpleCursorAdapter implements SectionInde
 				if (pi.getIsStred().equals("0"))
 				{
 					values.put(Contacts.STARRED, 1);
-					mContext.getContentResolver().update(Contacts.CONTENT_URI, values, Contacts._ID + "= ?", new String[] { pi.getContactID() });
+					mContext.getContentResolver().update(Contacts.CONTENT_URI,
+							values, Contacts._ID + "= ?", new String[]
+							{ pi.getContactID() });
 					pi.setIsStred("1");
-					imv.setImageDrawable(ctxt.getResources().getDrawable(R.drawable.fev));
+					imv.setImageDrawable(ctxt.getResources().getDrawable(
+							R.drawable.fev));
 
-				}
-				else
+				} else
 				{
 					values.put(Contacts.STARRED, 0);
-					ctxt.getContentResolver().update(Contacts.CONTENT_URI, values, Contacts._ID + "= ?", new String[] { pi.getContactID() });
+					ctxt.getContentResolver().update(Contacts.CONTENT_URI,
+							values, Contacts._ID + "= ?", new String[]
+							{ pi.getContactID() });
 					pi.setIsStred("0");
-					imv.setImageDrawable(ctxt.getResources().getDrawable(R.drawable.fev_inv));
+					imv.setImageDrawable(ctxt.getResources().getDrawable(
+							R.drawable.fev_inv));
 
 				}
 				v.setTag(pi);
@@ -161,7 +181,9 @@ public class MyContactAdapter extends SimpleCursorAdapter implements SectionInde
 			public void onClick(View view)
 			{
 				PhoneBookItemInfo pi = (PhoneBookItemInfo) view.getTag();
-				LinphoneActivity.instance().setAddresGoToDialerAndCall(pi.getNumber().toString(), pi.getName().toString(), null);
+				LinphoneActivity.instance().setAddresGoToDialerAndCall(
+						pi.getNumber().toString(), pi.getName().toString(),
+						null);
 			}
 		});
 	}
@@ -176,12 +198,14 @@ public class MyContactAdapter extends SimpleCursorAdapter implements SectionInde
 			if (type == TYPE_HEADER)
 			{
 
-				((TextView) v.findViewById(R.id.section)).setText((String) getSections()[getSectionForPosition(position)]);
-				((TextView) v.findViewById(R.id.section)).setVisibility(View.VISIBLE);
-			}
-			else
+				((TextView) v.findViewById(R.id.section))
+						.setText((String) getSections()[getSectionForPosition(position)]);
+				((TextView) v.findViewById(R.id.section))
+						.setVisibility(View.VISIBLE);
+			} else
 			{
-				((TextView) v.findViewById(R.id.section)).setVisibility(View.GONE);
+				((TextView) v.findViewById(R.id.section))
+						.setVisibility(View.GONE);
 			}
 
 		}
@@ -191,7 +215,10 @@ public class MyContactAdapter extends SimpleCursorAdapter implements SectionInde
 	@Override
 	public int getItemViewType(int position)
 	{
-		if (position == getPositionForSection(getSectionForPosition(position))) { return TYPE_HEADER; }
+		if (position == getPositionForSection(getSectionForPosition(position)))
+		{
+			return TYPE_HEADER;
+		}
 		return TYPE_NORMAL;
 	}
 
@@ -210,16 +237,26 @@ public class MyContactAdapter extends SimpleCursorAdapter implements SectionInde
 	@Override
 	public boolean isEnabled(int position)
 	{
-		if (getItemViewType(position) == TYPE_HEADER) { return false; }
+		if (getItemViewType(position) == TYPE_HEADER)
+		{
+			return false;
+		}
 		return true;
 	}
 
 	private Bitmap loadContactPhoto(ContentResolver cr, Cursor c)
 	{
-		Uri person = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, c.getLong(c.getColumnIndex(ContactsContract.Contacts._ID)));
-		Uri photo = Uri.withAppendedPath(person, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
-		Cursor cursor = cr.query(photo, new String[] { ContactsContract.Contacts.Photo.PHOTO }, null, null, null);
-		if (cursor == null) { return null; }
+		Uri person = ContentUris.withAppendedId(
+				ContactsContract.Contacts.CONTENT_URI,
+				c.getLong(c.getColumnIndex(ContactsContract.Contacts._ID)));
+		Uri photo = Uri.withAppendedPath(person,
+				ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
+		Cursor cursor = cr.query(photo, new String[]
+		{ ContactsContract.Contacts.Photo.PHOTO }, null, null, null);
+		if (cursor == null)
+		{
+			return null;
+		}
 		try
 		{
 			if (cursor.moveToFirst())
@@ -229,17 +266,18 @@ public class MyContactAdapter extends SimpleCursorAdapter implements SectionInde
 				{
 					Bitmap bmp;
 					bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
-					Bitmap mutableBitmap = bmp.copy(Bitmap.Config.ARGB_8888, true);
+					Bitmap mutableBitmap = bmp.copy(Bitmap.Config.ARGB_8888,
+							true);
 					return mutableBitmap;
 				}
 			}
-		}
-		finally
+		} finally
 		{
 			cursor.close();
 
 		}
-		return ((BitmapDrawable) ctxt.getResources().getDrawable(R.drawable.ic_contact_picture_180_holo_light)).getBitmap();
+		return ((BitmapDrawable) ctxt.getResources().getDrawable(
+				R.drawable.ic_contact)).getBitmap();
 
 	}
 
@@ -249,8 +287,7 @@ public class MyContactAdapter extends SimpleCursorAdapter implements SectionInde
 		try
 		{
 			return indexer.getPositionForSection(section);
-		}
-		catch (Exception e)
+		} catch (Exception e)
 		{
 			return 0;
 
@@ -264,13 +301,13 @@ public class MyContactAdapter extends SimpleCursorAdapter implements SectionInde
 		{
 			int i = 0;
 			int maxLength = usedSectionNumbers.length;
-			while (i < maxLength && position >= sectionToPosition.get(usedSectionNumbers[i]))
+			while (i < maxLength
+					&& position >= sectionToPosition.get(usedSectionNumbers[i]))
 			{
 				i++;
 			}
 			return usedSectionNumbers[i - 1];
-		}
-		catch (Exception e)
+		} catch (Exception e)
 		{
 			return 0;
 
@@ -289,7 +326,8 @@ public class MyContactAdapter extends SimpleCursorAdapter implements SectionInde
 		Integer c = (int) alpha;
 		for (int i = c; i >= 0; i--)
 		{
-			if (sectionToPosition.containsKey(i)) return sectionToPosition.get(i);
+			if (sectionToPosition.containsKey(i))
+				return sectionToPosition.get(i);
 		}
 		return -1;
 

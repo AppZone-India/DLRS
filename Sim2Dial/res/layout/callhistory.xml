@@ -2,121 +2,47 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_menu"
-    android:orientation="vertical" >
+    android:background="#ffffff"
+    android:padding="@dimen/layout_padding" >
 
     <TextView
-        android:id="@+id/destin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/callto"
-        android:layout_below="@+id/callto"
-        android:layout_marginTop="8dp"
-        android:text="destina"
-        android:textColor="@color/gray_333333" />
-
-    <View
-        android:id="@+id/view1"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:layout_below="@+id/dur"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_menu" />
-
-    <TextView
-        android:id="@+id/dur"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_toRightOf="@+id/textView1"
-        android:text="duration"
-        android:textColor="@color/gray_333333" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/view1"
-        android:layout_marginLeft="16dp"
-        android:layout_toRightOf="@+id/dur"
-        android:textColor="@color/gray_333333"
-        android:textStyle="bold"
-        android:text="Total Cost in " />
-
-    <TextView
-        android:id="@+id/callto"
+        android:id="@+id/amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="10dp"
-        android:text="callto"
-        android:textColor="@color/black"
-        android:textSize="15dp"
-        android:textStyle="bold" />
+        android:text="TextView"
+        android:textColor="#424242"
+        android:textSize="@dimen/large_text" />
 
     <TextView
-        android:id="@+id/cur"
+        android:id="@+id/method"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/cost"
-        android:layout_alignBottom="@+id/cost"
-        android:layout_toRightOf="@+id/textView2"
-        
-        android:textColor="@color/gray_333333"
-        android:textStyle="bold"
-        android:text="cur" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/view1"
-        android:layout_toRightOf="@+id/cur"
-        android:textColor="@color/gray_333333"
-        android:textStyle="bold"
-        android:text=":" />
-
-    <TextView
-        android:id="@+id/cost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/view1"
-        android:layout_toRightOf="@+id/textView3"
-        android:text="cost"
-        android:textColor="@color/gray_333333"
-        android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/callto"
-        android:layout_marginRight="20dp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/call1" />
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/time"
+        android:text="TextView"
+        android:textColor="#818181"
+        android:textSize="@dimen/large_text" />
 
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/destin"
-        android:layout_marginTop="3dp"
-        android:text="date"
-        android:textColor="@color/gray_333333" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="TextView"
+        android:textColor="#818181"
+        android:textSize="@dimen/normal_text" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/destin"
-        android:layout_marginTop="3dp"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/date"
-        android:text="Duration in sec:"
-        android:textColor="@color/gray_333333" />
+        android:text="TextView"
+        android:textColor="#818181"
+        android:textSize="@dimen/normal_text" />
 
 </RelativeLayout>

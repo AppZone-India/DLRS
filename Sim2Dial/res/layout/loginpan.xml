@@ -117,7 +117,7 @@
             android:hint="@string/hint_country"
             android:paddingLeft="10dp"
             android:paddingRight="8dp"
-            android:singleLine="true"
+            android:singleLine="true"  android:textSize="@dimen/normal_text" 
             android:textColor="@color/co_login_btn" />
 
         <requestFocus />

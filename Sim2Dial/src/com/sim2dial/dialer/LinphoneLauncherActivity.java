@@ -39,10 +39,10 @@ public class LinphoneLauncherActivity extends Activity
 
 		mHandler = new Handler();
 
-		if (getResources().getBoolean(R.bool.enable_push_id))
-		{
-			Compatibility.initPushNotificationService(this);
-		}
+//		if (getResources().getBoolean(R.bool.enable_push_id))
+//		{
+//			Compatibility.initPushNotificationService(this);
+//		}
 
 	//	boolean useFirstLoginActivity = getResources().getBoolean(R.bool.use_first_login_activity);
 		/*

@@ -2,15 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/menu_item"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/login_btn_height" >
+    android:layout_height="wrap_content" >
 
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:src="@drawable/about_chat"
         android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/acc_item" 
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/layout_padding"
         android:padding="10dp"
         />
 
@@ -19,22 +19,20 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentRight="true"
-        android:layout_alignRight="@+id/imageView1"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/layout_padding"
         android:layout_toRightOf="@+id/imageView1"
-        android:gravity="center_vertical"
         android:text="TextView"
-        android:textColor="@color/co_policy"
+        android:textColor="@color/co_callback_nor"
         android:textSize="@dimen/normal_text"
         android:textStyle="bold" />
+
     <View
         android:layout_width="fill_parent"
-        android:background="@color/co_list_divider"
-        android:layout_height="1px" 
+        android:layout_height="1px"
         android:layout_alignParentBottom="true"
-        android:paddingLeft="20dp"
-      
-        />
-    
-    
+        android:layout_marginTop="@dimen/layout_padding"
+        android:background="@color/co_list_divider"
+        android:paddingLeft="20dp" />
 
 </RelativeLayout>

@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true">
-        <layer-list >
-            <!-- <item android:drawable="@drawable/dial_btn_bg">
-                
-            </item> -->
-            <item android:drawable="@drawable/numpad_sharp_over" />
-        </layer-list>
-        
-    </item> 
-        
-    <item>
-    	 <layer-list >
-            <!-- <item android:drawable="@drawable/dial_btn_bg">
-                
-            </item> -->
-            <item android:drawable="@drawable/ic_plus" />
-        </layer-list>
-     </item>
-</selector>
 
+    <item android:state_pressed="true"><layer-list>
+            <item><shape>
+                    <solid android:color="#ffff" />
+                </shape></item>
+            <item><bitmap android:gravity="center" android:src="@drawable/ic_plus_inv" android:tileMode="disabled" />
+            </item>
+        </layer-list></item>
+    <item><layer-list>
+            <item><shape>
+                    <solid android:color="#ffff" />
+                </shape></item>
+            <item><bitmap android:gravity="center" android:src="@drawable/ic_plus" android:tileMode="disabled" />
+            </item>
+        </layer-list></item>
+
+</selector>

@@ -17,8 +17,10 @@ import android.widget.TextView;
 
 import com.sim2dial.dialer.db.HistoryStatus;
 import com.sim2dial.dialer.db.MyContentProvider;
+import com.sim2dial.dialer.util.Theme;
 
-public class MyHSimpleCAdapter extends SimpleCursorAdapter {
+public class MyHSimpleCAdapter extends SimpleCursorAdapter
+{
 
 	Cursor c1;
 	Context ctxt;
@@ -28,7 +30,8 @@ public class MyHSimpleCAdapter extends SimpleCursorAdapter {
 	long i = 0, j = 0;
 
 	public MyHSimpleCAdapter(Context context, int layout, Cursor c1,
-			String[] from, int[] to) {
+			String[] from, int[] to)
+	{
 		super(context, layout, c1, from, to);
 		c1 = context.getContentResolver().query(MyContentProvider.Content_Uri,
 				null, null, null, null);
@@ -37,31 +40,37 @@ public class MyHSimpleCAdapter extends SimpleCursorAdapter {
 	}
 
 	@Override
-	public View getView(int pos, View arg1, ViewGroup arg2) {
+	public View getView(int pos, View arg1, ViewGroup arg2)
+	{
 		View v = super.getView(pos, arg1, arg2);
 		ImageView detail = (ImageView) v.findViewById(R.id.detail);
+		detail.setImageDrawable(Theme.selectorDrawable("ic_call"));
 		RelativeLayout tv = (RelativeLayout) v.findViewById(R.id.placeholder);
 		final TextView rowid = (TextView) v.findViewById(R.id.rowid);
 
 		// c.moveToPosition(pos);
 		// tv.setText(HistoryStatus.Column_No);
 		// v.setTag(detail);
-		detail.setOnClickListener(new View.OnClickListener() {
+		detail.setOnClickListener(new View.OnClickListener()
+		{
 
 			@Override
-			public void onClick(View arg0) {
+			public void onClick(View arg0)
+			{
 				String id = rowid.getText().toString();
 				// Uri getrow=Uri.parse(MyContentProvider.Content_Uri+"/"+id);
-				String[] projection = { HistoryStatus.Column_ID,
-						HistoryStatus.Column_Name, HistoryStatus.Column_Date,
+				String[] projection =
+				{ HistoryStatus.Column_ID, HistoryStatus.Column_Name,
+						HistoryStatus.Column_Date,
 						HistoryStatus.Column_Duration, HistoryStatus.Column_No,
 						HistoryStatus.Column_Status, HistoryStatus.Column_Time,
 						HistoryStatus.Column_Timestamp };
 				Cursor c = ctxt.getContentResolver().query(
 						MyContentProvider.Content_Uri, projection,
-						HistoryStatus.Column_ID + "=?", new String[] { id },
-						null);
-				if (c != null) {
+						HistoryStatus.Column_ID + "=?", new String[]
+						{ id }, null);
+				if (c != null)
+				{
 					c.moveToFirst();
 					no = c.getString(c.getColumnIndex(HistoryStatus.Column_No));
 					name = c.getString(c
@@ -78,31 +87,38 @@ public class MyHSimpleCAdapter extends SimpleCursorAdapter {
 							.getColumnIndex(HistoryStatus.Column_Status));
 					c.close();
 					LinphoneActivity.instance().setAddressAndGoToDialer(no);
-					/*LinphoneActivity.instance().setAddresGoToDialerAndCall(no,
-							name, null);*/
-				} else {
+					/*
+					 * LinphoneActivity.instance().setAddresGoToDialerAndCall(no,
+					 * name, null);
+					 */
+				} else
+				{
 
 				}
 			}
 
 		});
 
-		tv.setOnClickListener(new View.OnClickListener() {
+		tv.setOnClickListener(new View.OnClickListener()
+		{
 
 			@Override
-			public void onClick(View v) {
+			public void onClick(View v)
+			{
 				String id = rowid.getText().toString();
 				// Uri getrow=Uri.parse(MyContentProvider.Content_Uri+"/"+id);
-				String[] projection = { HistoryStatus.Column_ID,
-						HistoryStatus.Column_Name, HistoryStatus.Column_Date,
+				String[] projection =
+				{ HistoryStatus.Column_ID, HistoryStatus.Column_Name,
+						HistoryStatus.Column_Date,
 						HistoryStatus.Column_Duration, HistoryStatus.Column_No,
 						HistoryStatus.Column_Status, HistoryStatus.Column_Time,
 						HistoryStatus.Column_Timestamp };
 				Cursor c = ctxt.getContentResolver().query(
 						MyContentProvider.Content_Uri, projection,
-						HistoryStatus.Column_ID + "=?", new String[] { id },
-						null);
-				if (c != null) {
+						HistoryStatus.Column_ID + "=?", new String[]
+						{ id }, null);
+				if (c != null)
+				{
 					c.moveToFirst();
 					no = c.getString(c.getColumnIndex(HistoryStatus.Column_No));
 					name = c.getString(c
@@ -121,7 +137,8 @@ public class MyHSimpleCAdapter extends SimpleCursorAdapter {
 					LinphoneActivity.instance().displayHistoryDetails(date,
 							time, dur, name, no, status, timestamp);
 
-				} else {
+				} else
+				{
 					// Toast.makeText(ctxt, , 20).show();
 				}
 
@@ -132,9 +149,10 @@ public class MyHSimpleCAdapter extends SimpleCursorAdapter {
 	}
 
 	@Override
-	public void bindView(View v, final Context ctxt, Cursor c) {
+	public void bindView(View v, final Context ctxt, Cursor c)
+	{
 		super.bindView(v, ctxt, c);
-		LinearLayout llp = (LinearLayout) v.findViewById(R.id.parview);
+		RelativeLayout llp = (RelativeLayout) v.findViewById(R.id.parview);
 		RelativeLayout rlp = (RelativeLayout) v.findViewById(R.id.placeholder);
 		ImageView stat = (ImageView) v.findViewById(R.id.icon);
 		ImageView detail = (ImageView) v.findViewById(R.id.detail);
@@ -142,7 +160,7 @@ public class MyHSimpleCAdapter extends SimpleCursorAdapter {
 		TextView tvn = (TextView) v.findViewById(R.id.dur);
 		TextView tvd = (TextView) v.findViewById(R.id.dat);
 		TextView tvt = (TextView) v.findViewById(R.id.time);
-		TextView sep = (TextView) v.findViewById(R.id.separator);
+		// TextView sep = (TextView) v.findViewById(R.id.separator);
 
 		TextView rowid = (TextView) v.findViewById(R.id.rowid);
 
@@ -154,10 +172,12 @@ public class MyHSimpleCAdapter extends SimpleCursorAdapter {
 		time = c.getString(c.getColumnIndex(HistoryStatus.Column_Duration));
 		status = c.getString(c.getColumnIndex(HistoryStatus.Column_Status));
 		i++;
-		if (name.length() < 1) {
+		if (name.length() < 1)
+		{
 
 			tv.setText(no);
-		} else {
+		} else
+		{
 			tv.setText(name);
 		}
 
@@ -169,33 +189,38 @@ public class MyHSimpleCAdapter extends SimpleCursorAdapter {
 		 * 
 		 * Date d2=new Date();
 		 */
-		if (cdate.equals(date)) {
-			if (i == 1) {
-				sep.setVisibility(View.VISIBLE);
-			} else {
-				sep.setVisibility(View.GONE);
-			}
+		if (cdate.equals(date))
+		{
+			// if (i == 1) {
+			// sep.setVisibility(View.VISIBLE);
+			// } else {
+			// sep.setVisibility(View.GONE);
+			// }
 			tvd.setText("Today");
-		} else {
-			j++;
-			if (j == 1) {
-				sep.setVisibility(View.VISIBLE);
-			} else {
-				sep.setVisibility(View.GONE);
-			}
+		} else
+		{
+			// j++;
+			// if (j == 1) {
+			// sep.setVisibility(View.VISIBLE);
+			// } else {
+			// sep.setVisibility(View.GONE);
+			// }
 			tvd.setText(date);
 		}
 
-		if (status.equals("Outgoing")) {
-			stat.setImageResource(R.drawable.call_status_outgoing);
-		} else if (status.equals("Incoming")) {
-			stat.setImageResource(R.drawable.call_status_incoming);
-		} else if (status.equals("Missed")) {
-			stat.setImageResource(R.drawable.call_status_missed);
-		}
+//		if (status.equals("Outgoing"))
+//		{
+//			stat.setImageResource(R.drawable.call_status_outgoing);
+//		} else if (status.equals("Incoming"))
+//		{
+//			stat.setImageResource(R.drawable.call_status_incoming);
+//		} else if (status.equals("Missed"))
+//		{
+//			stat.setImageResource(R.drawable.call_status_missed);
+//		}
 
 		tvn.setText(no);
-		tvt.setText(time);
+		tvt.setText("Duration : " + time);
 
 		rowid.setText(c.getString(c.getColumnIndex(HistoryStatus.Column_ID)));
 		v.setTag(detail);
@@ -217,11 +242,13 @@ public class MyHSimpleCAdapter extends SimpleCursorAdapter {
 		 * null); } });
 		 */
 
-		rlp.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+		rlp.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener()
+		{
 
 			@Override
 			public void onCreateContextMenu(ContextMenu menu, View v,
-					ContextMenuInfo menuInfo) {
+					ContextMenuInfo menuInfo)
+			{
 				/* menu.add(0, v.getId(), 0, ctxt.getString(R.string.delete)); */
 			}
 		});

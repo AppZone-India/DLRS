@@ -86,6 +86,7 @@ public class ContactsFragment extends Fragment implements OnClickListener, OnIte
 		contactsList.setAdapter(cadap);
 		contactsList.setOnItemClickListener(this);
 
+	
 		allContacts = (TextView) view.findViewById(R.id.allContacts);
 		allContacts.setOnClickListener(this);
 
@@ -108,8 +109,11 @@ public class ContactsFragment extends Fragment implements OnClickListener, OnIte
 				return fetchAllContact(searchbox.getText().toString());
 			}
 		});
-
+		allContacts.setTextColor(getResources().getColor(R.color.gray_333333));
+		linphoneContacts.setSelected(false);
+		linphoneContacts.setTextColor(getResources().getColor(R.color.white));
 		return view;
+		
 
 	}
 
@@ -244,6 +248,7 @@ public class ContactsFragment extends Fragment implements OnClickListener, OnIte
 			onlyDisplayLinphoneContacts = false;
 			
 			allContacts.setSelected(true);
+			
 			allContacts.setTextColor(getResources().getColor(R.color.gray_333333));
 			linphoneContacts.setSelected(false);
 			linphoneContacts.setTextColor(getResources().getColor(R.color.white));

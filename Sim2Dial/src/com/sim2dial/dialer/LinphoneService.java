@@ -276,7 +276,7 @@ public final class LinphoneService extends Service implements LinphoneServiceLis
 		}
 		catch (Exception e)
 		{
-			bm = BitmapFactory.decodeResource(getResources(), R.drawable.unknown_small);
+			bm = BitmapFactory.decodeResource(getResources(), R.drawable.ic_contact);
 		}
 		String name = address.getDisplayName() == null ? address.getUserName() : address.getDisplayName();
 		mIncallNotif = Compatibility.createInCallNotification(getApplicationContext(), mNotificationTitle, getString(notificationTextId), inconId, bm, name, mNotifContentIntent);
@@ -365,7 +365,7 @@ public final class LinphoneService extends Service implements LinphoneServiceLis
 		}
 		catch (Exception e)
 		{
-			bm = BitmapFactory.decodeResource(getResources(), R.drawable.unknown_small);
+			bm = BitmapFactory.decodeResource(getResources(), R.drawable.ic_contact);
 		}
 		mMsgNotif = Compatibility.createMessageNotification(getApplicationContext(), mMsgNotifCount, fromName, message, bm, notifContentIntent);
 

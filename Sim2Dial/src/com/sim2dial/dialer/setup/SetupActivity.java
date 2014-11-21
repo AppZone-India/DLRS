@@ -1,6 +1,5 @@
 package com.sim2dial.dialer.setup;
 
-import org.json.JSONObject;
 import org.linphone.mediastream.Log;
 
 import android.app.Activity;
@@ -28,10 +27,11 @@ public class SetupActivity extends FragmentActivity implements OnClickListener
 {
 	private static SetupActivity	instance;
 	private RelativeLayout			back, next, cancel;
-	private SetupFragments			currentFragment;
+	private SetupFragmentsEnum			currentFragment;
 
 	protected void onCreate(Bundle savedInstanceState)
 	{
+		getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_in_call_gradient_connected));
 		super.onCreate(savedInstanceState);
 
 		if (getResources().getBoolean(R.bool.isTablet) && getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
@@ -61,20 +61,20 @@ public class SetupActivity extends FragmentActivity implements OnClickListener
 				{
 					GenericLoginFragment welcomeFragment = new GenericLoginFragment();
 					getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainer, welcomeFragment).commit();
-					currentFragment = SetupFragments.GENERIC_LOGIN;
+					currentFragment = SetupFragmentsEnum.GENERIC_LOGIN;
 				}
 				else
 				{
 					GenericLoginFragment welcomeFragment = new GenericLoginFragment();
 					getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainer, welcomeFragment).commit();
-					currentFragment = SetupFragments.GENERIC_LOGIN;
+					currentFragment = SetupFragmentsEnum.GENERIC_LOGIN;
 					Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG).show();
 				}
 
 			}
 			else
 			{
-				currentFragment = (SetupFragments) savedInstanceState.getSerializable("CurrentFragment");
+				currentFragment = (SetupFragmentsEnum) savedInstanceState.getSerializable("CurrentFragment");
 			}
 		}
 
@@ -157,64 +157,64 @@ public class SetupActivity extends FragmentActivity implements OnClickListener
 		 * R.id.setup_back) { handleBackEvent(); }
 		 */
 	}
-
-	private void handleBackEvent()
-	{
-		if (currentFragment == SetupFragments.SHOW_STATES)
-		{
-			ShowCountry fragment = new ShowCountry();
-			changeFragment(fragment);
-			currentFragment = SetupFragments.SHOW_COUNTRY;
-
-			/*
-			 * next.setVisibility(View.GONE); back.setVisibility(View.GONE);
-			 */
-		}
-		else if (currentFragment == SetupFragments.SHOW_COUNTRY)
-		{
-			GenericLoginFragment fragment = new GenericLoginFragment();
-			changeFragment(fragment);
-			currentFragment = SetupFragments.GENERIC_LOGIN;
-
-			/*
-			 * next.setVisibility(View.GONE); back.setVisibility(View.GONE);
-			 */
-		}
-		if (currentFragment == SetupFragments.SHOW_CITIES)
-		{
-//			ShowStates fragment = new ShowStates();
+//
+//	private void handleBackEvent()
+//	{
+//		if (currentFragment == SetupFragments.SHOW_STATES)
+//		{
+//			ShowCountry fragment = new ShowCountry();
 //			changeFragment(fragment);
-			currentFragment = SetupFragments.SHOW_STATES;
-
-			/*
-			 * next.setVisibility(View.GONE); back.setVisibility(View.GONE);
-			 */
-		}
-		else if (currentFragment == SetupFragments.GENERIC_LOGIN)
-		{
-			finish();
-		}
-
-	}
-
-	private void launchEchoCancellerCalibration(boolean sendEcCalibrationResult)
-	{
-		if (LinphoneManager.getLc().needsEchoCalibration() && !Engine.getPref().getBoolean(getString(R.string.first_launch_suceeded_once_key), false))
-		{
-			EchoCancellerCalibrationFragment fragment = new EchoCancellerCalibrationFragment();
-			fragment.enableEcCalibrationResultSending(sendEcCalibrationResult);
-			changeFragment(fragment);
-			currentFragment = SetupFragments.ECHO_CANCELLER_CALIBRATION;
-			/*
-			 * back.setVisibility(View.VISIBLE); next.setVisibility(View.GONE);
-			 * next.setEnabled(false); cancel.setEnabled(false);
-			 */
-		}
-		else
-		{
-			success();
-		}
-	}
+//			currentFragment = SetupFragments.SHOW_COUNTRY;
+//
+//			/*
+//			 * next.setVisibility(View.GONE); back.setVisibility(View.GONE);
+//			 */
+//		}
+//		else if (currentFragment == SetupFragments.SHOW_COUNTRY)
+//		{
+//			GenericLoginFragment fragment = new GenericLoginFragment();
+//			changeFragment(fragment);
+//			currentFragment = SetupFragments.GENERIC_LOGIN;
+//
+//			/*
+//			 * next.setVisibility(View.GONE); back.setVisibility(View.GONE);
+//			 */
+//		}
+//		if (currentFragment == SetupFragments.SHOW_CITIES)
+//		{
+////			ShowStates fragment = new ShowStates();
+////			changeFragment(fragment);
+//			currentFragment = SetupFragments.SHOW_STATES;
+//
+//			/*
+//			 * next.setVisibility(View.GONE); back.setVisibility(View.GONE);
+//			 */
+//		}
+//		else if (currentFragment == SetupFragments.GENERIC_LOGIN)
+//		{
+//			finish();
+//		}
+//
+//	}
+//
+//	private void launchEchoCancellerCalibration(boolean sendEcCalibrationResult)
+//	{
+//		if (LinphoneManager.getLc().needsEchoCalibration() && !Engine.getPref().getBoolean(getString(R.string.first_launch_suceeded_once_key), false))
+//		{
+//			EchoCancellerCalibrationFragment fragment = new EchoCancellerCalibrationFragment();
+//			fragment.enableEcCalibrationResultSending(sendEcCalibrationResult);
+//			changeFragment(fragment);
+//			currentFragment = SetupFragmentsEnum.ECHO_CANCELLER_CALIBRATION;
+//			/*
+//			 * back.setVisibility(View.VISIBLE); next.setVisibility(View.GONE);
+//			 * next.setEnabled(false); cancel.setEnabled(false);
+//			 */
+//		}
+//		else
+//		{
+//			success();
+//		}
+//	}
 
 	private void logIn(String username, String password, String domain, boolean sendEcCalibrationResult)
 	{
@@ -226,10 +226,10 @@ public class SetupActivity extends FragmentActivity implements OnClickListener
 
 		saveCreatedAccount(username, password, domain);
 
-		LinphoneManager.getInstance().initializePayloads();
-
+		
 		try
-		{
+		{LinphoneManager.getInstance().initializePayloads();
+
 			LinphoneManager.getInstance().initFromConf();
 		}
 		catch (Throwable e)
@@ -279,47 +279,47 @@ public class SetupActivity extends FragmentActivity implements OnClickListener
 	{
 		GenericLoginFragment fragment = new GenericLoginFragment();
 		changeFragment(fragment);
-		currentFragment = SetupFragments.GENERIC_LOGIN;
+		currentFragment = SetupFragmentsEnum.GENERIC_LOGIN;
 	}
 
-	public void displayLoginLinphone()
-	{
-		LinphoneLoginFragment fragment = new LinphoneLoginFragment();
-		changeFragment(fragment);
-		currentFragment = SetupFragments.LINPHONE_LOGIN;
-	}
-
-	public void displayWizard()
-	{
-		WizardFragment fragment = new WizardFragment();
-		changeFragment(fragment);
-		currentFragment = SetupFragments.WIZARD;
-	}
-
-	public void displayCountry(String clist)
-	{
-		Bundle args=new Bundle();
-		args.putString("listcountry", clist);
-		ShowCountry fragment = new ShowCountry();
-		fragment.setArguments(args);
-		changeFragment(fragment);
-		currentFragment = SetupFragments.SHOW_COUNTRY;
-	}
-
-	public void displayStates()
-	{
-//		ShowStates fragment = new ShowStates();
+//	public void displayLoginLinphone()
+//	{
+//		LinphoneLoginFragment fragment = new LinphoneLoginFragment();
 //		changeFragment(fragment);
-		currentFragment = SetupFragments.SHOW_STATES;
-	}
+//		currentFragment = SetupFragments.LINPHONE_LOGIN;
+//	}
 
-	public void displaycities()
-	{
-		ShowCities fragment = new ShowCities();
-		changeFragment(fragment);
-		currentFragment = SetupFragments.SHOW_CITIES;
+//	public void displayWizard()
+//	{
+//		WizardFragment fragment = new WizardFragment();
+//		changeFragment(fragment);
+//		currentFragment = SetupFragments.WIZARD;
+//	}
+//
+//	public void displayCountry(String clist)
+//	{
+//		Bundle args=new Bundle();
+//		args.putString("listcountry", clist);
+//		ShowCountry fragment = new ShowCountry();
+//		fragment.setArguments(args);
+//		changeFragment(fragment);
+//		currentFragment = SetupFragments.SHOW_COUNTRY;
+//	}
 
-	}
+//	public void displayStates()
+//	{
+////		ShowStates fragment = new ShowStates();
+////		changeFragment(fragment);
+//		currentFragment = SetupFragments.SHOW_STATES;
+//	}
+
+//	public void displaycities()
+//	{
+//		ShowCities fragment = new ShowCities();
+//		changeFragment(fragment);
+//		currentFragment = SetupFragments.SHOW_CITIES;
+//
+//	}
 
 	public void saveCreatedAccount(String username, String password, String domain)
 	{
@@ -363,41 +363,41 @@ public class SetupActivity extends FragmentActivity implements OnClickListener
 		 */
 	}
 
-	public void displayWizardConfirm(String username)
-	{
-		WizardConfirmFragment fragment = new WizardConfirmFragment();
+//	public void displayWizardConfirm(String username)
+//	{
+//		WizardConfirmFragment fragment = new WizardConfirmFragment();
+//
+//		Bundle extras = new Bundle();
+//		extras.putString("Username", username);
+//		fragment.setArguments(extras);
+//		changeFragment(fragment);
+//
+//		currentFragment = SetupFragments.WIZARD_CONFIRM;
+//
+//		/*
+//		 * next.setVisibility(View.VISIBLE); next.setEnabled(false);
+//		 * back.setVisibility(View.GONE);
+//		 */
+//	}
 
-		Bundle extras = new Bundle();
-		extras.putString("Username", username);
-		fragment.setArguments(extras);
-		changeFragment(fragment);
-
-		currentFragment = SetupFragments.WIZARD_CONFIRM;
-
-		/*
-		 * next.setVisibility(View.VISIBLE); next.setEnabled(false);
-		 * back.setVisibility(View.GONE);
-		 */
-	}
-
-	public void isAccountVerified()
-	{
-		Toast.makeText(this, getString(R.string.setup_account_validated), Toast.LENGTH_LONG).show();
-
-		LinphoneManager.getInstance().initializePayloads();
-
-		try
-		{
-			LinphoneManager.getInstance().initFromConf();
-		}
-		catch (Throwable e)
-		{
-			Log.e(e, "Error while initializing from config in first login activity");
-			Toast.makeText(this, getString(R.string.error), Toast.LENGTH_LONG).show();
-		}
-
-		launchEchoCancellerCalibration(true);
-	}
+//	public void isAccountVerified()
+//	{
+//		Toast.makeText(this, getString(R.string.setup_account_validated), Toast.LENGTH_LONG).show();
+//
+//		LinphoneManager.getInstance().initializePayloads();
+//
+//		try
+//		{
+//			LinphoneManager.getInstance().initFromConf();
+//		}
+//		catch (Throwable e)
+//		{
+//			Log.e(e, "Error while initializing from config in first login activity");
+//			Toast.makeText(this, getString(R.string.error), Toast.LENGTH_LONG).show();
+//		}
+//
+//		launchEchoCancellerCalibration(true);
+//	}
 
 	public void isEchoCalibrationFinished()
 	{
@@ -406,11 +406,11 @@ public class SetupActivity extends FragmentActivity implements OnClickListener
 
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
-		if (keyCode == KeyEvent.KEYCODE_BACK)
-		{
-			handleBackEvent();
-			return true;
-		}
+//		if (keyCode == KeyEvent.KEYCODE_BACK)
+//		{
+//			handleBackEvent();
+//			return true;
+//		}
 		return super.onKeyDown(keyCode, event);
 	}
 

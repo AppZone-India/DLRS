@@ -26,3 +26,10 @@ bc-android.keystore
 /gen
 /jni
 /patches
+/submodules/
+/lint.xml
+/local.properties
+/project.properties
+/default.properties
+/ant.properties
+/.gitignore

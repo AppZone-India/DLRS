@@ -34,6 +34,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.ns.kgraphicsengin.RemoteData;
+import com.ns.kgraphicsengin.RemoteData.OnRemoteCompleated;
+import com.ns.kgraphicsengin.RemoteData.RemoteProperty;
 import com.sim2dial.dialer.CustomAlertDialog;
 import com.sim2dial.dialer.Engine;
 import com.sim2dial.dialer.LinphoneActivity;
@@ -43,59 +46,73 @@ import com.sim2dial.dialer.R;
 /**
  * @author Guillaume Beraudo
  */
-public class CallBackButton extends Button implements OnClickListener,
-		AddressAware {
+public class CallBackButton extends Button implements OnClickListener,OnRemoteCompleated,
+		AddressAware
+{
 
 	private AddressText mAddress;
 
-	public void setAddressWidget(AddressText a) {
+	public void setAddressWidget(AddressText a)
+	{
 		mAddress = a;
 	}
 
-	public void setExternalClickListener(OnClickListener e) {
+	public void setExternalClickListener(OnClickListener e)
+	{
 		setOnClickListener(e);
 	}
 
-	public void resetClickListener() {
+	public void resetClickListener()
+	{
 		setOnClickListener(this);
 	}
 
 	Context ctxt;
 
-	public CallBackButton(Context context, AttributeSet attrs) {
+	public CallBackButton(Context context, AttributeSet attrs)
+	{
 		super(context, attrs);
 		ctxt = context;
 		setOnClickListener(this);
 	}
 
-	public void onClick(View v) {
+	public void onClick(View v)
+	{
 
-		
-		String ctry = Engine.getPref().getString("country", "UK");
-		String state = Engine.getPref().getString("stateid", "0");
-		String city = Engine.getPref().getString("cityid", "0");
-		String cid = Engine.getPref().getString(Engine.PREF.ID_CLIENT.name(), "0");
+//		https://www.mycallhistory.com/vportal/API/SIM2DIAL/ddi_api.php?idClient=[idClient]&country=[
+//
+//			CountryName]&number=[PhoneNumber]
+
 		String address = mAddress.getText().toString();
 
-		if (ctry.length() < 1) {
-			Toast.makeText(ctxt, "There is no access number for this country",
-					20).show();
-		} else {
-
-			if (address.length() >= 1) {
-				if (LinphoneUtils.isHightBandwidthConnection(ctxt)) {
+			if (address.length() >= 1)
+			{
+				if (LinphoneUtils.isHightBandwidthConnection(ctxt))
+				{
 					LinphoneActivity.instance().storeHistory(address, address,
 							"00:00", "Outgoing");
-					GetDDI gt = new GetDDI();
-					gt.execute(ctry, state, city, cid, address);
-				} else {
+				RemoteData data=new RemoteData(1000,CallBackButton.this);
+				data.setProgressDialog(ctxt, 0);
+				if(!"Please Select Country".equals(Engine.PREF.COUNTRY.name()))
+				{
+				data.execute(RemoteData.RESULT_JSON, LinphoneUtils.API_URL+"ddi_api.php?idClient="
+				+Engine.getPref().getString(Engine.PREF.ID_CLIENT.name(),"0")+"&country="
+						+Engine.getPref().getString(Engine.PREF.COUNTRY.name(),"0")+"&number="+address);
+				}
+				else
+				{
+					Toast.makeText(ctxt, "Please Select Country", 2000).show();
+				}
+				} else
+				{
 					Toast.makeText(ctxt, "Check Data Connection", 20).show();
 				}
-			} else {
+			} else
+			{
 				Toast.makeText(ctxt, "Please Enter Number.", 20).show();
 			}
 
-		}
+		
 
 		/*
 		 * try { if
@@ -125,7 +142,8 @@ public class CallBackButton extends Button implements OnClickListener,
 		 */
 	}
 
-	protected void onWrongDestinationAddress() {
+	protected void onWrongDestinationAddress()
+	{
 		Toast.makeText(
 				getContext(),
 				String.format(
@@ -135,12 +153,14 @@ public class CallBackButton extends Button implements OnClickListener,
 				.show();
 	}
 
-	class GetDDI extends AsyncTask<String, String, String> {
+	class GetDDI extends AsyncTask<String, String, String>
+	{
 
 		ProgressDialog pb;
 
 		@Override
-		protected void onPreExecute() {
+		protected void onPreExecute()
+		{
 			super.onPreExecute();
 			pb = new ProgressDialog(ctxt);
 			pb.show();
@@ -150,16 +170,19 @@ public class CallBackButton extends Button implements OnClickListener,
 		}
 
 		@Override
-		protected String doInBackground(String... params) {
+		protected String doInBackground(String... params)
+		{
 			String str = LinphoneUtils.getDDI(params[0], params[1], params[2],
 					params[3], params[4]);
 			String ddi = null, result = null;
-			try {
+			try
+			{
 				JSONObject jobj = new JSONObject(str);
 				ddi = jobj.getString("ddi");
 				result = jobj.getString("result");
 
-			} catch (JSONException e) {
+			} catch (JSONException e)
+			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -167,10 +190,12 @@ public class CallBackButton extends Button implements OnClickListener,
 		}
 
 		@Override
-		protected void onPostExecute(String result) {
+		protected void onPostExecute(String result)
+		{
 			super.onPostExecute(result);
 			pb.dismiss();
-			if (result.contains("1") && result != null) {
+			if (result.contains("1") && result != null)
+			{
 				String ddi[] = result.split("[|]");
 				/*
 				 * LinphoneActivity.instance().storeHistory("", ddi[0], "00:00",
@@ -183,12 +208,35 @@ public class CallBackButton extends Button implements OnClickListener,
 				 * CustomAlertDialog.showAlert(ctxt, null, null, "Status",
 				 * result, true, "Ok", false, "Back", true, null);
 				 */
-			} else {
+			} else
+			{
 				CustomAlertDialog.showAlert(ctxt, null, null, "Error",
 						"Communication Error", false, "Ok", true, "Ok", true,
 						null);
 
 			}
 		}
+	}
+
+	@Override
+	public void remoteCompleated(RemoteProperty r)
+	{
+		//{"listnumber":[{"Contact Number":"++","Status":"success"}]} 
+		if(r!=null)
+		{
+			try
+			{
+				JSONObject ob=r.getJsonObject().getJSONArray("listnumber").getJSONObject(0);
+		
+				ctxt.startActivity(new Intent(Intent.ACTION_CALL, Uri
+						.parse("tel:" + ob.getString("Contact Number"))));
+			} catch (JSONException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
 	}
 }

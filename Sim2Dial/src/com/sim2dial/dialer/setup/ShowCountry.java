@@ -200,7 +200,7 @@ public class ShowCountry extends Fragment implements OnItemClickListener,OnRemot
 			Engine.getEditor().putString("country", o.toString()).commit();
 			Engine.getEditor().putBoolean("noSelection", false).commit();
 			RemoteData remoteData = new RemoteData(SELECT_STATES, ShowCountry.this);
-			remoteData.setProgressDialog(getActivity());
+			remoteData.setProgressDialog(getActivity(),R.style.ProgressBar);
 			remoteData.execute(RemoteData.RESULT_PLANE_TEXT, LinphoneUtils.API_URL + "countrylist_api.php");			
 			//new GetStates().execute(o.toString());
 		}

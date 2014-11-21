@@ -13,7 +13,7 @@ import com.sim2dial.dialer.R.string;
 import org.linphone.mediastream.Version;
 
 import com.sim2dial.dialer.compatibility.Compatibility;
-import com.sim2dial.dialer.ui.AvatarWithShadow;
+
 
 import android.content.ContentProviderOperation;
 import android.content.Context;
@@ -180,12 +180,12 @@ public class EditContactFragment extends Fragment {
 			}
 		}
 		
-		AvatarWithShadow contactPicture = (AvatarWithShadow) view.findViewById(R.id.contactPicture);
+		ImageView contactPicture = (ImageView) view.findViewById(R.id.contactPicture);
 		if (contact != null && contact.getPhotoUri() != null) {
 			InputStream input = Compatibility.getContactPictureInputStream(getActivity().getContentResolver(), contact.getID());
 			contactPicture.setImageBitmap(BitmapFactory.decodeStream(input));
         } else {
-        	contactPicture.setImageResource(R.drawable.unknown_small);
+        	contactPicture.setImageResource(R.drawable.ic_contact);
         }
 		
 		initNumbersFields((TableLayout) view.findViewById(R.id.controls), contact);

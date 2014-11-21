@@ -338,7 +338,7 @@ public class ApiFivePlus {
 	
 	public static Notification createMessageNotification(Context context, String title, String msg, PendingIntent intent) {
 		Notification notif = new Notification();
-		notif.icon = R.drawable.chat_icon_over;
+		notif.icon = R.drawable.ic_contact;
 		notif.iconLevel = 0;
 		notif.when = System.currentTimeMillis();
 		notif.flags &= Notification.FLAG_ONGOING_EVENT;
