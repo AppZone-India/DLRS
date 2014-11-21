@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff" >
+
+    <TextView
+        android:id="@+id/header"
+        style="@style/Header"
+        android:layout_alignParentTop="true"
+        android:text="@string/recharge" />
+
+    <EditText
+        android:id="@+id/pin"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="15dp"
+        android:ems="10"
+        android:gravity="center_vertical|left"
+        android:hint="plese enter pin"
+        android:inputType="number"
+        android:textColor="#424242" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/topup"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/login_btn_height"
+        android:layout_below="@+id/pin"
+        android:layout_margin="15dp"
+        android:background="@drawable/sltr_login"
+        android:gravity="center"
+        android:text="Topup"
+        android:textColor="#ffffff" />
+
+</RelativeLayout>

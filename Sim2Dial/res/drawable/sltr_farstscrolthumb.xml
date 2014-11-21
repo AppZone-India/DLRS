@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/shp_thumb" android:state_pressed="true"></item>
+    <item><layer-list>
+            <item android:drawable="@drawable/shp_thumb_light"></item>
+            <item android:drawable="@drawable/shp_thumb" android:state_pressed="true"></item>
+        </layer-list></item>
+
+</selector>
